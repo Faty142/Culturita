@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Culturita - Registrarse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link rel="stylesheet" href="estilos/estilosreg.css"/>
+</head>
+<body class="bg-[#fef3c7] background-pattern">
+  <!-- Logo flotante en esquina superior derecha -->
+  <div class="fixed top-4 right-4 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
+    <a href="index.html">
+      <img src="imagenes/logo.jpg" alt="Logo Culturita" class="h-14 w-14 object-contain rounded-full" />
+    </a>
+  </div>
+  <div class="fixed top-4 right-28 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
+    <a href="#" id="btnAyuda">
+      <img src="imagenes/ayuda.png" alt="Ayuda" class="h-10 w-10 object-contain rounded-full"/>
+    </a>
+  </div>  
+  <div class="min-h-screen flex flex-col items-center justify-center p-4">
+    <header class="text-center mb-8">
+      <h1 class="text-6xl font-bold text-[#4b3b2a] tracking-wider">Culturita</h1>
+    </header>
+    <main class="bg-[#ffffff] backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-lg w-full max-w-2xl border border-[#78350f]">
+      
+      <!-- Título dinámico agregado aquí -->
+      <h2 id="titulo" class="text-2xl font-semibold text-[#4b3b2a] text-center mb-6"></h2>
+
+      <form id="formRegistro">
+        <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-6">
+          <div class="mb-6 relative">
+            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-[#90a4ae]">person</span>
+            <input id="nombre" class="w-full pl-12 pr-4 py-3 bg-white border border-[#78350f] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fbbf24] transition-all duration-300 placeholder-[#92400e] text-[#78350f]" placeholder="Nombre" type="text" required/>
+          </div>
+          <div class="mb-6 relative">
+            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-[#90a4ae]">person_outline</span>
+            <input id="apellido" class="w-full pl-12 pr-4 py-3 bg-white border border-[#78350f] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fbbf24] transition-all duration-300 placeholder-[#92400e] text-[#78350f]" placeholder="Apellido" type="text" required/>
+          </div>
+        </div>
+        <div class="mb-6 relative">
+          <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-[#90a4ae]">badge</span>
+          <input id="usuario" class="w-full pl-12 pr-4 py-3 bg-white border border-[#78350f] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fbbf24] transition-all duration-300 placeholder-[#92400e] text-[#78350f]" placeholder="Nombre de Usuario (coloca un nombre corto)" type="text" required/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-6">
+          <div class="mb-6 relative">
+            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-[#90a4ae]">email</span>
+            <input id="correo" class="w-full pl-12 pr-4 py-3 bg-white border border-[#78350f] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fbbf24] transition-all duration-300 placeholder-[#92400e] text-[#78350f]" placeholder="Email" type="email" required/>
+          </div>
+          <div class="mb-6 relative">
+            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-[#90a4ae]">email</span>
+            <input id="confirmarCorreo" class="w-full pl-12 pr-4 py-3 bg-white border border-[#78350f] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fbbf24] transition-all duration-300 placeholder-[#92400e] text-[#78350f]" placeholder="Confirmación de Email" type="email" required/>
+          </div>
+          <div class="mb-6 relative">
+            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-[#90a4ae]">lock</span>
+            <input id="contrasena" name="password" 
+                  class="w-full pl-12 pr-4 py-3 bg-white border border-[#78350f] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fbbf24] transition-all duration-300 placeholder-[#92400e] text-[#78350f]" 
+                  placeholder="Contraseña" 
+                  type="password" 
+                  required
+                  minlength="6"
+                  autocomplete="new-password">
+          </div>
+          <div class="mb-6 relative">
+            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-[#90a4ae]">lock_reset</span>
+            <input id="conf_contrasena" name="confirm_password"
+                  class="w-full pl-12 pr-4 py-3 bg-white border border-[#78350f] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fbbf24] transition-all duration-300 placeholder-[#92400e] text-[#78350f]" 
+                  placeholder="Confirmación de Contraseña" 
+                  type="password" 
+                  required
+                  minlength="6"
+                  autocomplete="new-password">
+          </div>
+        </div>
+        <button class="w-full bg-[#78350f] text-[#fde68a] font-bold py-3 rounded-xl hover:bg-[#fbbf24] hover:text-[#78350f] transition-colors duration-300 shadow-md mt-2" type="submit">
+          Registrarse
+        </button>
+      </form>
+    </main>
+    <footer class="mt-8 text-center text-[#4b3b2a]">
+      <p>¿Ya tienes una cuenta? <a id="enlaceLogin" class="font-bold text-[#78350f] hover:text-[#fbbf24] hover:underline" href="#">Inicia Sesión</a></p>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="scripts/supabase.js"></script>
+  <script src="scripts/modelos.js"></script>
+  <script src="scripts/accesibilidad.js"></script>
+  <script src="scripts/registro.js"></script>
+
+  <!-- CONFIGURACIÓN DE ACCESIBILIDAD PARA REGISTRO -->
+  <script>
+  // Configuración específica para registro.html
+  const rol = new URLSearchParams(window.location.search).get('rol');
+  const esMaestro = rol === 'maestro';
+  const esPadres = rol === 'padres';
+  
+  sistemaAyuda.guiaPasos = [
+      {
+          selector: 'header h1',
+          titulo: 'Título de la Aplicación',
+          descripcion: 'Bienvenido a Culturita, tu plataforma cultural educativa.',
+          posicionFlecha: 'bottom'
+      },
+      {
+          selector: '#titulo',
+          titulo: 'Tipo de Registro',
+          descripcion: `Aquí se muestra si te estás registrando como ${esMaestro ? 'Maestro' : 'Padre de familia'}.`,
+          posicionFlecha: 'bottom'
+      },
+      {
+          selector: '#nombre',
+          titulo: 'Nombre',
+          descripcion: 'Ingresa tu nombre de pila.',
+          posicionFlecha: 'right'
+      },
+      {
+          selector: '#apellido',
+          titulo: 'Apellido',
+          descripcion: 'Ingresa tu apellido.',
+          posicionFlecha: 'right'
+      },
+      {
+          selector: '#usuario',
+          titulo: 'Nombre de Usuario',
+          descripcion: 'Crea un nombre de usuario corto y fácil de recordar.',
+          posicionFlecha: 'right'
+      },
+      {
+          selector: '#correo',
+          titulo: 'Correo Electrónico',
+          descripcion: 'Ingresa tu correo electrónico principal.',
+          posicionFlecha: 'right'
+      },
+      {
+          selector: '#confirmarCorreo',
+          titulo: 'Confirmación de Correo',
+          descripcion: 'Vuelve a ingresar tu correo electrónico para verificar.',
+          posicionFlecha: 'right'
+      },
+      {
+          selector: '#contrasena',
+          titulo: 'Contraseña',
+          descripcion: 'Crea una contraseña segura de al menos 6 caracteres.',
+          posicionFlecha: 'right'
+      },
+      {
+          selector: '#conf_contrasena',
+          titulo: 'Confirmación de Contraseña',
+          descripcion: 'Vuelve a ingresar tu contraseña para verificar.',
+          posicionFlecha: 'right'
+      },
+      {
+          selector: '#formRegistro button[type="submit"]',
+          titulo: 'Botón de Registro',
+          descripcion: 'Haz clic aquí para completar tu registro.',
+          posicionFlecha: 'right',
+          posicionPersonalizada: { top: '80%', left: '85%' }
+      },
+      {
+          selector: 'footer',
+          titulo: 'Enlace de Inicio de Sesión',
+          descripcion: 'Si ya tienes una cuenta, puedes iniciar sesión aquí.',
+          posicionFlecha: 'right',
+          posicionPersonalizada: { top: '87%', left: '80%' }
+      }
+  ];
+
+  // Sobreescribir el método de explicación completa para registro.html
+  sistemaAyuda.mostrarModalExplicacion = function() {
+      const modalHTML = `
+          <div id="modalExplicacion" class="fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+              <div class="bg-white rounded-2xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                  <div class="flex justify-between items-center mb-4">
+                      <h3 class="text-2xl font-bold text-[#78350f]">📚 Guía Completa - Página de Registro</h3>
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="text-2xl text-gray-500 hover:text-red-500">×</button>
+                  </div>
+
+                  <div class="space-y-6">
+                      <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
+                          <h4 class="font-bold text-lg mb-2">🎯 Propósito de esta página</h4>
+                          <p>Esta es la página de registro de Culturita. Aquí podrás crear tu cuenta como <strong>${esMaestro ? 'Maestro' : 'Padre de familia'}</strong>.</p>
+                      </div>
+
+                      <div class="grid md:grid-cols-2 gap-4">
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span class="material-icons">person</span>
+                                  Información Personal
+                              </h4>
+                              <p class="mb-3">Datos necesarios para tu perfil:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li><strong>Nombre y Apellido</strong> para identificarte</li>
+                                  <li><strong>Nombre de usuario</strong> único y fácil de recordar</li>
+                                  <li><strong>Correo electrónico</strong> válido para contacto</li>
+                              </ul>
+                          </div>
+
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span class="material-icons">security</span>
+                                  Seguridad de la Cuenta
+                              </h4>
+                              <p class="mb-3">Protege tu cuenta con:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li><strong>Contraseña segura</strong> de al menos 6 caracteres</li>
+                                  <li><strong>Confirmación de contraseña</strong> para verificar</li>
+                                  <li><strong>Correo de verificación</strong> para validar</li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="bg-blue-50 p-4 rounded-lg">
+                          <h4 class="font-bold text-lg mb-2">💡 ¿Cómo proceder?</h4>
+                          <ol class="list-decimal ml-5 space-y-2 text-left">
+                              <li><strong>Completa todos los campos</strong> del formulario</li>
+                              <li><strong>Verifica que los correos</strong> coincidan exactamente</li>
+                              <li><strong>Asegúrate que las contraseñas</strong> sean iguales</li>
+                              <li><strong>Haz clic en "Registrarse"</strong> para crear tu cuenta</li>
+                              <li><strong>Revisa tu correo</strong> para confirmar el registro</li>
+                          </ol>
+                      </div>
+
+                      <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                          <h4 class="font-bold text-lg mb-2">${esMaestro ? '👩‍🏫 Información para Maestros' : '👨‍👩‍👧‍👦 Información para Padres'}</h4>
+                          <p class="text-sm">Al registrarte como ${esMaestro ? 'maestro' : 'padre'}, podrás:</p>
+                          <ul class="list-disc ml-5 mt-2 text-sm text-left">
+                              ${esMaestro ? 
+                                `<li>Gestionar grupos de estudiantes</li>
+                                 <li>Recibir audios culturales de padres</li>
+                                 <li>Crear mapas culturales interactivos</li>
+                                 <li>Acceder a materiales educativos</li>` :
+                                `<li>Grabar y compartir audios culturales</li>
+                                 <li>Colaborar con el maestro de tu hijo</li>
+                                 <li>Participar en actividades del grupo</li>
+                                 <li>Contribuir a proyectos culturales</li>`
+                              }
+                          </ul>
+                      </div>
+
+                      <div class="bg-yellow-50 p-4 rounded-lg">
+                          <h4 class="font-bold text-lg mb-2">⚠️ Importante</h4>
+                          <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                              <li>Guarda tu contraseña en un lugar seguro</li>
+                              <li>Usa un correo electrónico que revises frecuentemente</li>
+                              <li>El nombre de usuario debe ser único en el sistema</li>
+                              <li>Después del registro, verifica tu correo electrónico</li>
+                          </ul>
+                      </div>
+                  </div>
+
+                  <div class="mt-6 text-center">
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-lg transition">
+                          Entendido, ¡gracias!
+                      </button>
+                  </div>
+              </div>
+          </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+  };
+
+  // Configurar el botón de ayuda
+  document.addEventListener('DOMContentLoaded', function() {
+      const btnAyuda = document.getElementById('btnAyuda');
+      if (btnAyuda) {
+          btnAyuda.addEventListener('click', function(e) {
+              e.preventDefault();
+              sistemaAyuda.mostrarOpcionesAyuda();
+          });
+      }
+
+      // Configurar el enlace de login dinámicamente
+      const enlaceLogin = document.getElementById('enlaceLogin');
+      if (enlaceLogin) {
+          enlaceLogin.href = `login.html?rol=${rol}`;
+      }
+  });
+  </script>
+</body>
+</html>

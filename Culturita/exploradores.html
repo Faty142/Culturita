@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Exploradores de Tradición</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="estilos/estilosexploradores.css"/>
+  <link rel="stylesheet" href="estilos/estiloslogin.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-[#fef3c7] background-pattern font-[Poppins] text-[#78350f] min-h-screen p-4">
+  <div class="fixed top-4 right-24 z-50">
+    <a href="#" id="btnAyuda" class="bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-md border border-white/70 flex items-center justify-center">
+      <img src="imagenes/ayuda.png" alt="Ayuda" class="h-10 w-10 object-contain"/>
+    </a>
+  </div>
+  <div class="max-w-5xl mx-auto relative">
+    <h1 class="text-5xl font-bold text-center mb-4 tracking-wide">Exploradores de Tradición</h1>
+    <p class="text-center text-lg md:text-xl font-medium mb-8 px-4">
+      ¿Listo para embarcarte en un viaje cultural? Cada estado revela un pedacito de identidad: historia, tradición, manualidades, palabras y valores para fomentar la exploración, expresión artística y comprensión de las tradiciones locales. Al interactuar, formas parte de esta exploración viva de nuestras raíces.
+    </p>
+
+    <main id="mapaExploradores" class="relative bg-[#ffffff] backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-lg border border-[#78350f]">
+
+      <h2 class="text-2xl font-semibold mb-4">Selecciona un estado de México, o da clic en el botón para mirar lo estados desbloqueados.</h2>
+
+      <div class="mt-6 flex justify-center">
+        <button onclick="mostrarDesbloqueados()" class="bg-[#10B981] text-white px-6 py-2 rounded-full hover:bg-[#059669] transition font-semibold shadow-md">
+          Ver estados desbloqueados
+        </button>
+      </div>
+
+      <div class="relative w-full h-[600px] overflow-hidden rounded-xl shadow-inner">
+        <img src="imagenes/mapa-mexico3.jpg" alt="Mapa de México" class="w-full h-full object-contain"/>
+
+        <!-- Estados desbloqueados -->
+        <div data-estado="Chiapas" class="estado-mapa unlocked estado-chiapas" title="Chiapas"></div>
+        <div data-estado="Sonora" class="estado-mapa unlocked estado-sonora" title="Sonora"></div>
+        <div data-estado="Durango" class="estado-mapa unlocked estado-durango" title="Durango"></div>
+        <div data-estado="Michoacán" class="estado-mapa unlocked estado-michoacan" title="Michoacán"></div>
+        <div data-estado="Querétaro" class="estado-mapa unlocked estado-queretaro" title="Querétaro"></div>
+        <div data-estado="San Luis Potosí" class="estado-mapa unlocked estado-san-luis-potosi" title="San Luis Potosí"></div>
+        <div data-estado="Hidalgo" class="estado-mapa unlocked estado-hidalgo" title="Hidalgo"></div>
+        <div data-estado="Baja California Sur" class="estado-mapa unlocked estado-baja-california-sur" title="Baja California Sur"></div>
+
+        <!-- Estado bloqueado (Tabasco) -->
+        <div data-estado="Tabasco" class="estado-mapa locked estado-tabasco" title="Tabasco"></div>
+        <div data-estado="Baja California" class="estado-mapa locked estado-baja-california" title="Baja California"></div>
+        <div data-estado="Chihuahua" class="estado-mapa locked estado-chihuahua" title="Chihuahua"></div>
+        <div data-estado="Coahuila" class="estado-mapa locked estado-coahuila" title="Coahuila"></div>
+        <div data-estado="Nuevo León" class="estado-mapa locked estado-nuevo-leon" title="Nuevo León"></div>
+        <div data-estado="Tamaulipas" class="estado-mapa locked estado-tamaulipas" title="Tamaulipas"></div>
+        <div data-estado="Sinaloa" class="estado-mapa locked estado-sinaloa" title="Sinaloa"></div>
+        <div data-estado="Zacatecas" class="estado-mapa locked estado-zacatecas" title="Zacatecas"></div>
+        <div data-estado="Aguascalientes" class="estado-mapa locked estado-aguascalientes" title="Aguascalientes"></div>
+        <div data-estado="Nayarit" class="estado-mapa locked estado-nayarit" title="Nayarit"></div>
+        <div data-estado="Jalisco" class="estado-mapa locked estado-jalisco" title="Jalisco"></div>
+        <div data-estado="Guanajuato" class="estado-mapa locked estado-guanajuato" title="Guanajuato"></div>
+        <div data-estado="CDMX" class="estado-mapa locked estado-cdmx" title="CDMX"></div>
+        <div data-estado="Estado de México" class="estado-mapa locked estado-estado-de-mexico" title="Estado de México"></div>
+        <div data-estado="Morelos" class="estado-mapa locked estado-morelos" title="Morelos"></div>
+        <div data-estado="Puebla" class="estado-mapa locked estado-puebla" title="Puebla"></div>
+        <div data-estado="Tlaxcala" class="estado-mapa locked estado-tlaxcala" title="Tlaxcala"></div>
+        <div data-estado="Colima" class="estado-mapa locked estado-colima" title="Colima"></div>
+        <div data-estado="Guerrero" class="estado-mapa locked estado-guerrero" title="Guerrero"></div>
+        <div data-estado="Oaxaca" class="estado-mapa locked estado-oaxaca" title="Oaxaca"></div>
+        <div data-estado="Veracruz" class="estado-mapa locked estado-veracruz" title="Veracruz"></div>
+        <div data-estado="Campeche" class="estado-mapa locked estado-campeche" title="Campeche"></div>
+        <div data-estado="Yucatán" class="estado-mapa locked estado-yucatan" title="Yucatán"></div>
+        <div data-estado="Quintana Roo" class="estado-mapa locked estado-quintana-roo" title="Quintana Roo"></div>
+      </div>
+
+      <!-- Leyenda visual -->
+      <div class="mt-4 text-sm text-[#78350f] flex gap-6 justify-center">
+        <span class="flex items-center gap-2"><div class="w-4 h-4 bg-green-600 rounded"></div> Disponible</span>
+        <span class="flex items-center gap-2"><div class="w-4 h-4 bg-red-600 rounded opacity-90"></div> Bloqueado</span>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal emergente -->
+  <div id="modalEstado" class="fixed inset-0 bg-black/40 flex items-center justify-center hidden z-50">
+    <div class="bg-[#ffffff] p-6 rounded-xl shadow-xl w-full max-w-lg text-[#78350f] relative backdrop-blur-lg border border-[#78350f]">
+      <button onclick="cerrarModal()" class="absolute top-4 right-4 text-xl font-bold text-red-600 hover:text-red-800">✖️</button>
+      <h3 id="estadoTitulo" class="text-2xl font-bold mb-4"></h3>
+      <ul class="space-y-3 text-left text-[15px]">
+        <li><strong>📜 Mini historia:</strong> <span id="miniHistoria"></span></li>
+        <li><strong>🎶 Tradición:</strong> <span id="tradicion"></span></li>
+        <li><strong>🎨 Manualidad típica:</strong> <span id="manualidad"></span></li>
+        <li><strong>🗣️ Palabra:</strong> <span id="palabra"></span> — <span id="significado"></span></li>
+        <li><strong>🌟 Valor cultural:</strong> <span id="valor"></span></li>
+      </ul>
+      <button onclick="descargarPDF()" class="mt-6 w-full bg-[#78350f] text-[#fde68a] font-bold py-2 px-6 rounded hover:bg-[#fbbf24] hover:text-[#78350f] transition">
+        Descargar
+      </button>
+    </div>
+  </div>
+
+  <div id="modalDesbloqueados" class="fixed inset-0 bg-black/40 flex items-center justify-center hidden z-50">
+    <div class="bg-[#ffffff] p-6 rounded-xl shadow-xl w-full max-w-md text-[#78350f] relative backdrop-blur-lg border border-[#78350f]">
+      <button onclick="cerrarDesbloqueados()" class="absolute top-4 right-4 text-xl font-bold text-red-600 hover:text-red-800">✖️</button>
+      <h3 class="text-2xl font-bold mb-4 text-center">🌎 Estados desbloqueados</h3>
+      <ul id="listaDesbloqueados" class="list-disc pl-5 space-y-2 text-[15px]">
+        <!-- Contenido generado por JS -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- Librerías y lógica -->
+  <script src="scripts/supabase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="scripts/modelos.js"></script>
+  <script src="scripts/exploradores.js"></script>
+</body>
+</html>

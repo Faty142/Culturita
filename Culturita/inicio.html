@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido a Culturita</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos/estilosinicio.css"/>  
+</head>
+<body>
+  <div class="fixed top-4 right-24 z-50">
+    <a href="#" id="btnAyuda" class="boton-ayuda">
+      <img src="imagenes/ayuda.png" alt="Ayuda" class="h-10 w-10 object-contain"/>
+    </a>
+  </div>
+  <div class="hero">
+    <img src="imagenes/banner.png" alt="Niños explorando cultura" 
+       class="imagen-destacada" style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 1.5rem;">
+    <h1 class="text-[2.2rem] text-[#4b3b2a] mb-2 font-['Poppins'] font-bold text-center">¡Bienvenido a Culturita!</h1>
+    <p class="subtitle">Tu plataforma para explorar y enseñar la riqueza cultural de México</p>
+    
+    <div class="bienvenida-text">
+      <p>Desde aquí podrás acceder a todas las herramientas diseñadas para fomentar el aprendizaje cultural en el aula. Selecciona una sección para comenzar:</p>
+    </div>
+
+    <div class="secciones-grid">
+      <!-- Tarjeta 1 -->
+      <a href="cuentacuentos.html" class="seccion-card">
+        <div class="seccion-icon">🎧</div>
+        <h3 class="seccion-title">CuentaCuentos</h3>
+        <p class="seccion-desc">Audios interactivos con historias tradicionales para trabajar en clase.</p>
+      </a>
+      
+      <!-- Tarjeta 2 -->
+      <a href="mapamagico.html" class="seccion-card">
+        <div class="seccion-icon">🌎</div>
+        <h3 class="seccion-title">Mi Mapa Mágico</h3>
+        <p class="seccion-desc">Registra el origen cultural de tus alumnos y crea un mapa interactivo.</p>
+      </a>
+      
+      <!-- Tarjeta 3 -->
+      <a href="exploradores.html" class="seccion-card">
+        <div class="seccion-icon">👣</div>
+        <h3 class="seccion-title">Exploradores de Tradición</h3>
+        <p class="seccion-desc">Descubre costumbres, palabras y valores de cada estado de México.</p>
+      </a>
+    </div>
+  </div>
+
+  <script src="scripts/accesibilidad.js"></script>
+  <script>
+  // Configuración específica para inicio.html
+  sistemaAyuda.guiaPasos = [
+      {
+          selector: '.hero h1',
+          titulo: 'Bienvenida',
+          descripcion: 'Bienvenido a Culturita, tu plataforma cultural educativa.',
+          posicionFlecha: 'bottom'
+      },
+      {
+          selector: '.subtitle',
+          titulo: 'Propósito de la Plataforma',
+          descripcion: 'Esta plataforma está diseñada para explorar y enseñar la riqueza cultural de México.',
+          posicionFlecha: 'bottom'
+      },
+      {
+          selector: '.bienvenida-text',
+          titulo: 'Instrucciones',
+          descripcion: 'Desde aquí podrás acceder a todas las herramientas educativas disponibles.',
+          posicionFlecha: 'bottom'
+      },
+      {
+          selector: '.seccion-card:nth-child(1)',
+          titulo: 'CuentaCuentos',
+          descripcion: 'Accede a audios interactivos con historias tradicionales mexicanas.',
+          posicionFlecha: 'top'
+      },
+      {
+          selector: '.seccion-card:nth-child(2)',
+          titulo: 'Mi Mapa Mágico',
+          descripcion: 'Crea mapas interactivos con el origen cultural de tus alumnos.',
+          posicionFlecha: 'top'
+      },
+      {
+          selector: '.seccion-card:nth-child(3)',
+          titulo: 'Exploradores de Tradición',
+          descripcion: 'Descubre costumbres y tradiciones de cada estado de México.',
+          posicionFlecha: 'top'
+      }
+  ];
+
+  // Sobreescribir el método de explicación completa para inicio.html
+  sistemaAyuda.mostrarModalExplicacion = function() {
+      const modalHTML = `
+          <div id="modalExplicacion" class="fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+              <div class="bg-white rounded-2xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                  <div class="flex justify-between items-center mb-4">
+                      <h3 class="text-2xl font-bold text-[#78350f]">📚 Guía Completa - Página Principal</h3>
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="text-2xl text-gray-500 hover:text-red-500">×</button>
+                  </div>
+
+                  <div class="space-y-6">
+                      <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
+                          <h4 class="font-bold text-lg mb-2">🎯 Propósito de esta página</h4>
+                          <p>Esta es la página principal de Culturita después del inicio de sesión. Aquí encontrarás todas las herramientas educativas disponibles para trabajar la cultura mexicana en el aula.</p>
+                      </div>
+
+                      <div class="grid md:grid-cols-3 gap-4">
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span>🎧 CuentaCuentos</h4>
+                              <p class="mb-3">Herramienta para acceder a:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li>Audios de historias tradicionales</li>
+                                  <li>Cuentos interactivos</li>
+                                  <li>Material para trabajar en clase</li>
+                              </ul>
+                          </div>
+
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span>🌎 Mi Mapa Mágico</h4>
+                              <p class="mb-3">Permite crear:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li>Mapas culturales interactivos</li>
+                                  <li>Registro de origen de alumnos</li>
+                                  <li>Visualización de diversidad cultural</li>
+                              </ul>
+                          </div>
+
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span>👣 Exploradores de Tradición</h4>
+                              <p class="mb-3">Descubre información sobre:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li>Costumbres por estado</li>
+                                  <li>Palabras y vocabulario regional</li>
+                                  <li>Valores y tradiciones mexicanas</li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="bg-blue-50 p-4 rounded-lg">
+                          <h4 class="font-bold text-lg mb-2">💡 ¿Cómo usar esta página?</h4>
+                          <ol class="list-decimal ml-5 space-y-2 text-left">
+                              <li><strong>Selecciona una herramienta</strong> haciendo clic en la tarjeta correspondiente</li>
+                              <li><strong>Explora las funciones</strong> de cada sección según tus necesidades</li>
+                              <li><strong>Utiliza los materiales</strong> en tus actividades de clase</li>
+                              <li><strong>Vuelve a esta página</strong> para acceder a otras herramientas</li>
+                          </ol>
+                      </div>
+                  </div>
+
+                  <div class="mt-6 text-center">
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-lg transition">
+                          Entendido, ¡gracias!
+                      </button>
+                  </div>
+              </div>
+          </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+  };
+
+  // Configurar el botón de ayuda
+  document.addEventListener('DOMContentLoaded', function() {
+      const btnAyuda = document.getElementById('btnAyuda');
+      if (btnAyuda) {
+          btnAyuda.addEventListener('click', function(e) {
+              e.preventDefault();
+              sistemaAyuda.mostrarOpcionesAyuda();
+          });
+      }
+  });
+  </script>
+</body>
+</html>

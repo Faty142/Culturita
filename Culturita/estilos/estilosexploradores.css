@@ -1,0 +1,330 @@
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 20px;
+  background-color: #fef3c7;
+}
+
+h1, h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #78350f; /* Color de texto principal */
+}
+
+/* Botón base para estados */
+.estado-mapa {
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Hover universal */
+.estado-mapa:hover {
+  transform: scale(1.05);
+}
+
+/* Estados desbloqueados */
+.unlocked {
+  border: 2px solid #166534; /* verde oscuro */
+}
+
+.unlocked:hover {
+  background-color: rgba(16, 185, 129, 0.9);
+}
+
+.locked {
+  border: 2px solid #991b1b;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.locked:hover {
+  background-color: rgba(220, 38, 38, 0.9);
+}
+
+/* Posición individual: Chiapas */
+.estado-chiapas {
+  top: 85%;
+  left: 76%;
+  width: 45px;
+  height: 45px;
+}
+
+/* Posición individual: Tabasco */
+.estado-tabasco {
+  top: 79%;
+  left: 74%;
+  width: 60px;
+  height: 20px;
+}
+
+.estado-baja-california {
+  top: 9%;
+  left: 8%;
+  width: 30px;
+  height: 50px;
+}
+
+.estado-baja-california-sur {
+  top: 30%;
+  left: 14%;
+  width: 45px;
+  height: 45px;
+}
+
+.estado-sonora {
+  top: 12%;
+  left: 19%;
+  width: 100px;
+  height: 80px;
+}
+
+.estado-chihuahua {
+  top: 20%;
+  left: 31%;
+  width: 112px;
+  height: 80px;
+}
+
+.estado-coahuila {
+  top: 26%;
+  left: 45%;
+  width: 80px;
+  height: 63px;
+}
+
+.estado-nuevo-leon {
+  top: 39%;
+  left: 54%;
+  width: 50px;
+  height: 40px;
+}
+
+.estado-tamaulipas {
+  top: 48%;
+  left: 58%;
+  width: 40px;
+  height: 55px;
+}
+
+.estado-durango {
+  top: 39%;
+  left: 37%;
+  width: 74px;
+  height: 65px;
+}
+
+.estado-sinaloa {
+  top: 40%;
+  left: 30%;
+  width: 40px;
+  height: 50px;
+}
+
+.estado-zacatecas {
+  top: 51%;
+  left: 45%;
+  width: 43px;
+  height: 40px;
+}
+
+.estado-san-luis-potosi {
+  top: 57%;
+  left: 53%;
+  width: 50px;
+  height: 37px;
+}
+
+.estado-aguascalientes {
+  top: 59%;
+  left: 48%;
+  width: 25px;
+  height: 29px;
+}
+
+.estado-nayarit {
+  top: 60%;
+  left: 39%;
+  width: 33px;
+  height: 38px;
+}
+
+.estado-jalisco {
+  top: 68%;
+  left: 40%;
+  width: 60px;
+  height: 40px;
+}
+
+.estado-guanajuato {
+  top: 64%;
+  left: 50%;
+  width: 40px;
+  height: 45px;
+}
+
+.estado-queretaro {
+  top: 66%;
+  left: 54%;
+  width: 25px;
+  height: 25px;
+}
+
+.estado-hidalgo {
+  top: 68%;
+  left: 57%;
+  width: 40px;
+  height: 27px;
+}
+
+.estado-cdmx {
+  top: 74%;
+  left: 57%;
+  width: 20px;
+  height: 20px;
+}
+
+.estado-estado-de-mexico {
+  top: 71%;
+  left: 55%;
+  width: 25px;
+  height: 45px;
+}
+
+.estado-morelos {
+  top: 77%;
+  left: 57%;
+  width: 27px;
+  height: 20px;
+}
+
+.estado-puebla {
+  top: 77%;
+  left: 60%;
+  width: 45px;
+  height: 35px;
+}
+
+.estado-tlaxcala {
+  top: 74%;
+  left: 61%;
+  width: 25px;
+  height: 20px;
+}
+
+.estado-michoacan {
+  top: 72%;
+  left: 49%;
+  width: 55px;
+  height: 35px;
+}
+
+.estado-colima {
+  top: 74%;
+  left: 43%;
+  width: 30px;
+  height: 30px;
+}
+
+.estado-guerrero {
+  top: 80%;
+  left: 54%;
+  width: 55px;
+  height: 40px;
+}
+
+.estado-oaxaca {
+  top: 84%;
+  left: 63%;
+  width: 68px;
+  height: 45px;
+}
+
+.estado-veracruz {
+  top: 71%;
+  left: 65%;
+  width: 35px;
+  height: 50px;
+}
+
+.estado-campeche {
+  top: 75%;
+  left: 83%;
+  width: 50px;
+  height: 45px;
+}
+
+.estado-yucatan {
+  top: 64%;
+  left: 87%;
+  width: 45px;
+  height: 40px;
+}
+
+.estado-quintana-roo {
+  top: 71%;
+  left: 89%;
+  width: 40px;
+  height: 40px;
+}
+
+.estado-mapa.locked {
+  background-color: transparent;
+  border: none;
+  opacity: 0;
+}
+
+.estado-mapa.locked:hover {
+  background-color: rgba(220, 38, 38, 0.8);
+  border: 2px solid #991b1b;
+  opacity: 1;
+}
+
+.estado-mapa.unlocked {
+  background-color: transparent;
+  border: none;
+  opacity: 0;
+}
+
+.estado-mapa.unlocked:hover {
+  background-color: rgba(16, 185, 129, 0.9);
+  border: 2px solid #166534;
+  opacity: 1;
+}
+
+/* Botón Descargar PDF (coordinado con tu paleta) */
+.bg-amber-500 {
+  background-color: #78350f !important;
+  color: #fde68a !important;
+}
+
+.bg-amber-500:hover {
+  background-color: #fbbf24 !important;
+  color: #78350f !important;
+}
+
+/* Leyenda */
+.text-amber-700 {
+  color: #78350f !important;
+}
+
+@media (max-width: 768px) {
+  .estado-mapa {
+    /* Hacer los estados más grandes en móviles para mejor tacto */
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  /* Ajustar posición de algunos estados problemáticos */
+  .estado-chiapas {
+    top: 80% !important;
+    left: 70% !important;
+  }
+
+  .estado-sonora {
+    width: 70px !important;
+    height: 60px !important;
+  }
+}
