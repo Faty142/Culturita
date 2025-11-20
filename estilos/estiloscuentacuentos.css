@@ -1,0 +1,101 @@
+body.maestro {
+  margin: 20px;
+  font-family: 'Inter', sans-serif;
+  background-color: #fef3c7;
+  padding-left: 90px; /* espacio para menú lateral */
+}
+
+h1 {
+  margin-bottom: 15px;
+  color: #78350f; /* Color de texto principal */
+}
+
+#contenido {
+  max-width: 800px;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid #78350f;
+}
+
+.audio-card {
+  border: 1px solid #78350f;
+  padding: 15px;
+  margin: 15px 0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.audio-card:hover {
+  transform: translateY(-2px);
+}
+
+.audio-card button {
+  margin-top: 8px;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Botón de descargar (mantenemos el color original) */
+.audio-card .btn-descargar {
+  background-color: #78350f;
+  color: #fde68a;
+}
+
+.audio-card .btn-descargar:hover {
+  background-color: #fbbf24;
+  color: #78350f;
+}
+
+/* Botón de eliminar (lo dejamos rojo como pediste) */
+.audio-card .btn-eliminar {
+  background-color: #dc3545;
+}
+
+.audio-card .btn-eliminar:hover {
+  background-color: #c82333;
+}
+
+/* Estilos para el formulario */
+#formularioAudio input,
+#formularioAudio select,
+#formularioAudio textarea {
+  border: 1px solid #90a4ae;
+  background-color: white;
+  color: #4b3b2a;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+#formularioAudio button[type="submit"] {
+  background-color: #78350f;
+  color: #fde68a;
+}
+
+#formularioAudio button[type="submit"]:hover {
+  background-color: #fbbf24;
+  color: #78350f;
+}
+
+@media (max-width: 768px) {
+  body.maestro {
+    padding-left: 0;
+    padding-bottom: 70px; /* Para el menú inferior */
+  }
+
+  .audio-card {
+    padding: 10px;
+  }
+
+  .audio-card button {
+    width: 100%;
+    margin-top: 5px;
+  }
+}

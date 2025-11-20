@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Culturita - Inicio de Sesión</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link rel="stylesheet" href="estilos/estiloslogin.css"/>
+</head>
+<body class="bg-[#fef3c7] background-pattern">
+  <!-- Logo flotante en esquina superior derecha -->
+  <div class="fixed top-4 right-4 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
+    <a href="index.html">
+      <img src="imagenes/logo.jpg" alt="Logo Culturita" class="h-14 w-14 object-contain rounded-full"/>
+    </a>
+  </div>
+  <div class="fixed top-4 right-28 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
+    <a href="#" id="btnAyuda">
+      <img src="imagenes/ayuda.png" alt="Ayuda" class="h-10 w-10 object-contain rounded-full"/>
+    </a>
+  </div>  
+  <div class="min-h-screen flex flex-col items-center justify-center p-4">
+    <header class="text-center mb-8">
+      <h1 class="text-6xl font-bold text-[#4b3b2a] tracking-wider">Culturita</h1>
+    </header>
+    <main class="bg-[#ffffff] backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-lg w-full max-w-md border border-[#78350f]">
+      <h2 id="titulo" class="text-2xl font-semibold text-[#4b3b2a] text-center mb-6"></h2>
+      <form id="formLogin">
+        <div class="mb-6 relative">
+          <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-[#90a4ae]">person</span>
+          <input id="email" class="w-full pl-12 pr-4 py-3 bg-white border border-[#78350f] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#92400e] text-[#78350f]" placeholder="Correo Electrónico" type="email" required/>
+        </div>
+        <div class="mb-6 relative">
+          <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-[#90a4ae]">lock</span>
+          <input id="contrasena" class="w-full pl-12 pr-4 py-3 bg-white border border-[#78350f] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#92400e] text-[#78350f]" placeholder="Contraseña" type="password" required/>
+        </div>
+        <!-- Selector de Maestro para Padres -->
+        <div id="selectorMaestro" class="mb-6 relative hidden">
+          <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-[#90a4ae]">school</span>
+          <select id="maestro" class="w-full pl-12 pr-4 py-3 bg-white border border-[#78350f] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#92400e] text-[#78350f]">
+            <option>Maestra Ana</option>
+            <option>Maestro Luis</option>
+            <option>Maestra Karen</option>
+          </select>
+        </div>
+        <button class="w-full bg-[#78350f] text-[#fde68a] font-bold py-3 rounded-xl hover:bg-[#fbbf24] hover:text-[#78350f] transition-colors duration-300 shadow-md" type="submit">
+          Iniciar Sesión
+        </button>
+      </form>
+    </main>
+    <footer class="mt-8 text-center text-[#4b3b2a]">
+      <p>
+        ¿No tienes una cuenta? 
+        <a id="enlaceRegistroMaestro" class="font-bold text-[#78350f] hover:text-[#fbbf24] hover:underline" href="registro.html?rol=maestro">Regístrate como Maestro</a> 
+        o 
+        <a id="enlaceRegistroPadres" class="font-bold text-[#78350f] hover:text-[#fbbf24] hover:underline" href="registro.html?rol=padres">Regístrate como Padre</a>
+      </p>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="scripts/supabase.js"></script>
+  <script src="scripts/modelos.js"></script>
+  <script src="scripts/accesibilidad.js"></script>
+  <script src="scripts/login.js"></script>
+
+  <!-- CONFIGURACIÓN DE ACCESIBILIDAD PARA LOGIN -->
+  <script>
+  // Configuración específica para login.html
+  sistemaAyuda.guiaPasos = [
+    {
+        selector: 'header h1',
+        titulo: 'Título de la Aplicación',
+        descripcion: 'Bienvenido a Culturita, tu plataforma cultural educativa.',
+        posicionFlecha: 'bottom'
+    },
+    {
+        selector: '#titulo',
+        titulo: 'Tipo de Inicio de Sesión',
+        descripcion: 'Aquí se muestra si estás ingresando como Maestro o como Padre de familia.',
+        posicionFlecha: 'bottom'
+    },
+    {
+        selector: '#email',
+        titulo: 'Correo Electrónico',
+        descripcion: 'Ingresa tu correo electrónico que registraste.',
+        posicionFlecha: 'right'
+    },
+    {
+        selector: '#contrasena',
+        titulo: 'Contraseña',
+        descripcion: 'Ingresa tu contraseña que registraste. Asegúrate de que sea la correcta.',
+        posicionFlecha: 'right'
+    }
+];
+
+// AGREGAR CONDICIONALMENTE EL PASO DEL SELECTOR DE MAESTRO
+const rol = new URLSearchParams(window.location.search).get('rol');
+if (rol === 'padres') {
+    sistemaAyuda.guiaPasos.push({
+        selector: '#selectorMaestro',
+        titulo: 'Selección de Maestro',
+        descripcion: 'Selecciona al maestro de tu hijo/a para vincular tu cuenta.',
+        posicionFlecha: 'right'
+    });
+}
+
+// CONTINUAR CON LOS DEMÁS PASOS
+sistemaAyuda.guiaPasos.push(
+    {
+        selector: '#formLogin button[type="submit"]',
+        titulo: 'Botón de Inicio de Sesión',
+        descripcion: 'Haz clic aquí para iniciar sesión con tus credenciales.',
+        posicionFlecha: 'right'
+    },
+    {
+        selector: 'footer',
+        titulo: 'Enlaces de Registro',
+        descripcion: 'Si no tienes cuenta, puedes registrarte como Maestro o como Padre según tu perfil.',
+        posicionFlecha: 'top',
+        posicionPersonalizada: { top: '76%', left: '80%' }
+    }
+);
+
+  // Sobreescribir el método de explicación completa para login.html
+  sistemaAyuda.mostrarModalExplicacion = function() {
+      const rol = new URLSearchParams(window.location.search).get('rol');
+      const esMaestro = rol === 'maestro';
+      const esPadres = rol === 'padres';
+      
+      const modalHTML = `
+          <div id="modalExplicacion" class="fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+              <div class="bg-white rounded-2xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                  <div class="flex justify-between items-center mb-4">
+                      <h3 class="text-2xl font-bold text-[#78350f]">📚 Guía Completa - Página de Inicio de Sesión</h3>
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="text-2xl text-gray-500 hover:text-red-500">×</button>
+                  </div>
+
+                  <div class="space-y-6">
+                      <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
+                          <h4 class="font-bold text-lg mb-2">🎯 Propósito de esta página</h4>
+                          <p>Esta es la página de inicio de sesión de Culturita. Aquí podrás acceder a tu cuenta según tu perfil: <strong>${esMaestro ? 'Maestro' : esPadres ? 'Padre' : 'Maestro o Padre'}</strong>.</p>
+                      </div>
+
+                      <div class="grid md:grid-cols-2 gap-4">
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span class="material-icons">person</span>
+                                  Credenciales de Acceso
+                              </h4>
+                              <p class="mb-3">Para iniciar sesión necesitas:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li><strong>Correo electrónico</strong> registrado</li>
+                                  <li><strong>Contraseña</strong> correcta</li>
+                                  <li>Perfil seleccionado adecuadamente</li>
+                              </ul>
+                          </div>
+
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span class="material-icons">school</span>
+                                  ${esPadres ? 'Selección de Maestro' : 'Acceso de Maestro'}
+                              </h4>
+                              <p class="mb-3">${esPadres ? 
+                                  'Como Padre, debes seleccionar al maestro de tu hijo para que pueda recibir tus audios culturales.' : 
+                                  'Como Maestro, tendrás acceso completo a todas las herramientas educativas.'}
+                              </p>
+                          </div>
+                      </div>
+
+                      <div class="bg-blue-50 p-4 rounded-lg">
+                          <h4 class="font-bold text-lg mb-2">💡 ¿Cómo proceder?</h4>
+                          <ol class="list-decimal ml-5 space-y-2 text-left">
+                              <li><strong>Verifica tu perfil</strong> en la parte superior del formulario</li>
+                              ${esPadres ? '<li><strong>Selecciona al maestro</strong> de tu hijo en el menú desplegable</li>' : ''}
+                              <li><strong>Ingresa tu correo electrónico</strong> y <strong>contraseña</strong></li>
+                              <li><strong>Haz clic en "Iniciar Sesión"</strong> para acceder a tu cuenta</li>
+                              <li>Si no tienes cuenta, <strong>regístrate</strong> usando los enlaces inferiores</li>
+                          </ol>
+                      </div>
+
+                      ${esPadres ? `
+                      <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                          <h4 class="font-bold text-lg mb-2">👨‍👩‍👧‍👦 Información para Padres</h4>
+                          <p class="text-sm">Al seleccionar un maestro, podrás:</p>
+                          <ul class="list-disc ml-5 mt-2 text-sm text-left">
+                              <li>Compartir audios culturales directamente con ese maestro</li>
+                              <li>Colaborar en las actividades del grupo de tu hijo</li>
+                              <li>Participar en proyectos culturales específicos</li>
+                          </ul>
+                      </div>
+                      ` : ''}
+                  </div>
+
+                  <div class="mt-6 text-center">
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-lg transition">
+                          Entendido, ¡gracias!
+                      </button>
+                  </div>
+              </div>
+          </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+  };
+
+  // Configurar el botón de ayuda
+  document.addEventListener('DOMContentLoaded', function() {
+      const btnAyuda = document.getElementById('btnAyuda');
+      if (btnAyuda) {
+          btnAyuda.addEventListener('click', function(e) {
+              e.preventDefault();
+              sistemaAyuda.mostrarOpcionesAyuda();
+          });
+      }
+  });
+  </script>
+</body>
+</html>

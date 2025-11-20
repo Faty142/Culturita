@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CuentaCuentos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="estilos/estiloscuentacuentos.css"/>
+  <link rel="stylesheet" href="estilos/estiloslogin.css"/>
+</head>
+<body class="bg-[#fef3c7] background-pattern font-[Poppins] min-h-screen text-[#78350f] flex items-center justify-center p-4"> 
+  <div class="max-w-5xl w-full">
+    <h1 class="text-5xl font-bold text-center mb-4 tracking-wide">CuentaCuentos</h1>
+    <div id="logoCulturitaPadres"></div>
+    <div id="introText" class="text-center mb-6 text-lg text-[#92400e]"></div> <!-- Texto descriptivo movido aquí -->
+    <div id="contenido" class="bg-[#ffffff] backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-lg border border-[#78350f]"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="scripts/supabase.js"></script>
+  <script src="scripts/modelos.js"></script>
+  <script src="scripts/accesibilidad.js"></script>
+  <script src="scripts/cuentacuentos.js"></script>
+
+  <script>
+  // Configuración de ayuda SOLO para padres en CuentaCuentos
+  document.addEventListener('DOMContentLoaded', function() {
+      const rol = sessionStorage.getItem("rol");
+      const btnAyuda = document.getElementById("btnAyuda");
+      
+      // SOLO configurar ayuda si es rol padres Y existe el botón de ayuda
+      if (btnAyuda && rol === "padres") {
+          btnAyuda.addEventListener('click', function(e) {
+              e.preventDefault();
+              
+              // Configuración específica para padres
+              sistemaAyuda.guiaPasos = [
+                  {
+                      selector: '#introText',
+                      titulo: 'Bienvenida para Padres',
+                      descripcion: 'Aquí puedes subir audios culturales que llegarán directamente al maestro de tus hijos.',
+                      posicionFlecha: 'bottom'
+                  },
+                  {
+                      selector: '#categoria',
+                      titulo: 'Selecciona la Categoría',
+                      descripcion: 'Elige entre cuento, canción o refrán para clasificar tu audio.',
+                      posicionFlecha: 'bottom'
+                  },
+                  {
+                      selector: '#titulo',
+                      titulo: 'Título del Audio',
+                      descripcion: 'Pon un título descriptivo para que el maestro identifique fácilmente tu audio.',
+                      posicionFlecha: 'bottom'
+                  },
+                  {
+                      selector: '#descripcion',
+                      titulo: 'Descripción',
+                      descripcion: 'Explica brevemente el contenido o contexto cultural del audio.',
+                      posicionFlecha: 'bottom'
+                  },
+                  {
+                      selector: '#archivo',
+                      titulo: 'Subir Archivo de Audio',
+                      descripcion: 'Selecciona el archivo de audio desde tu dispositivo (formatos MP3, WAV, etc.).',
+                      posicionFlecha: 'bottom'
+                  },
+                  {
+                      selector: 'button[type="submit"]',
+                      titulo: 'Enviar Audio',
+                      descripcion: 'Haz clic aquí para subir tu audio al sistema.',
+                      posicionFlecha: 'top'
+                  }
+              ];
+              
+              // Modal de explicación completa para padres
+              sistemaAyuda.mostrarModalExplicacion = function() {
+                  const modalHTML = `
+                      <div id="modalExplicacion" class="fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+                          <div class="bg-white rounded-2xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                              <div class="flex justify-between items-center mb-4">
+                                  <h3 class="text-2xl font-bold text-[#78350f]">📚 Guía Completa - CuentaCuentos para Padres</h3>
+                                  <button onclick="document.getElementById('modalExplicacion').remove()" 
+                                          class="text-2xl text-gray-500 hover:text-red-500">×</button>
+                              </div>
+
+                              <div class="space-y-6">
+                                  <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
+                                      <h4 class="font-bold text-lg mb-2">🎯 Propósito de esta sección</h4>
+                                      <p>Como padre/madre, esta sección te permite contribuir directamente a la educación cultural de tus hijos grabando y compartiendo audios de tradiciones familiares.</p>
+                                  </div>
+
+                                  <div class="grid md:grid-cols-2 gap-4">
+                                      <div class="bg-white p-4 rounded-lg border border-amber-200">
+                                          <h4 class="font-bold text-lg mb-2">🎙️ Tipos de Contenido</h4>
+                                          <ul class="list-disc ml-5 space-y-2 text-sm text-left">
+                                              <li><strong>Cuentos:</strong> Historias tradicionales o familiares</li>
+                                              <li><strong>Canciones:</strong> Melodías típicas o infantiles</li>
+                                              <li><strong>Refranes:</strong> Dichos populares y su significado</li>
+                                          </ul>
+                                      </div>
+
+                                      <div class="bg-white p-4 rounded-lg border border-amber-200">
+                                          <h4 class="font-bold text-lg mb-2">📋 Proceso de Subida</h4>
+                                          <ol class="list-decimal ml-5 space-y-2 text-sm text-left">
+                                              <li>Selecciona la categoría adecuada</li>
+                                              <li>Pon un título claro y descriptivo</li>
+                                              <li>Explica el contexto cultural</li>
+                                              <li>Selecciona el archivo de audio</li>
+                                              <li>Envía para que llegue al maestro</li>
+                                          </ol>
+                                      </div>
+                                  </div>
+
+                                  <div class="bg-blue-50 p-4 rounded-lg">
+                                      <h4 class="font-bold text-lg mb-2">💡 Consejos para Grabaciones</h4>
+                                      <ul class="list-disc ml-5 space-y-2 text-left">
+                                          <li>Busca un lugar tranquilo sin ruido de fondo</li>
+                                          <li>Habla claro y a un ritmo pausado</li>
+                                          <li>Puedes incluir a tus hijos en la grabación</li>
+                                          <li>Los archivos deben ser menores a 10MB</li>
+                                      </ul>
+                                  </div>
+                              </div>
+
+                              <div class="mt-6 text-center">
+                                  <button onclick="document.getElementById('modalExplicacion').remove()" 
+                                          class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-lg transition">
+                                      Entendido, ¡gracias!
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  `;
+                  
+                  document.body.insertAdjacentHTML('beforeend', modalHTML);
+              };
+              
+              // Mostrar opciones de ayuda
+              sistemaAyuda.mostrarOpcionesAyuda();
+          });
+      }
+      // Si es maestro, NO configuramos nada aquí - lo maneja secciones.html
+  });
+  </script>
+</body>
+</html>
