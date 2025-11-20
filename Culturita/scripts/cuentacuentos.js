@@ -152,7 +152,7 @@ async function initCuentaCuentos() {
     errorMessage += `
         </ul>
         <div class="flex justify-center">
-          <a href="login.html?rol=padres" 
+          <a href="./login.html?rol=padres" 
             class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded transition">
             Volver a iniciar sesión
           </a>
@@ -170,14 +170,14 @@ async function initCuentaCuentos() {
       // Muestra logo de Culturita flotante
       document.getElementById("logoCulturitaPadres").innerHTML = `
         <div class="fixed top-4 right-4 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
-          <a href="index.html">
-            <img src="imagenes/logo.jpg" alt="Logo Culturita" class="h-14 w-14 object-contain rounded-full" />
+          <a href="./index.html">
+            <img src="./imagenes/logo.jpg" alt="Logo Culturita" class="h-14 w-14 object-contain rounded-full" />
           </a>
         </div>
 
         <div class="fixed top-4 right-28 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
           <a href="#" id="btnAyuda">
-            <img src="imagenes/ayuda.png" alt="Ayuda" class="h-10 w-10 object-contain rounded-full"/>
+            <img src="./imagenes/ayuda.png" alt="Ayuda" class="h-10 w-10 object-contain rounded-full"/>
           </a>
         </div>
       `;
@@ -397,4 +397,5 @@ async function initCuentaCuentos() {
 }
 
 // Llamada inicial a la función principal
+
 initCuentaCuentos();
