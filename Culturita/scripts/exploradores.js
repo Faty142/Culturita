@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 try {
                     // Cargar la imagen
                     const img = new Image();
-                    img.src = `imagenes/${estadoObj.imagenManualidad}`;
+                    img.src = `./imagenes/${estadoObj.imagenManualidad}`;
                     
                     // Esperar a que cargue la imagen
                     await new Promise((resolve) => {
@@ -206,4 +206,5 @@ document.addEventListener("DOMContentLoaded", async () => {
             intentarMostrar(nombreEstado);
         });
     });
+
 });
