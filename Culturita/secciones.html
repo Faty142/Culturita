@@ -6,17 +6,17 @@
   <title>Secciones</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="estilos/estilossec.css"/>
-  <link rel="stylesheet" href="estilos/estiloslogin.css"/>
+  <link rel="stylesheet" href="./estilos/estilossec.css"/>
+  <link rel="stylesheet" href="./estilos/estiloslogin.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"/>
-  <script src="scripts/secciones.js" defer></script>
+  <script src="./scripts/secciones.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-[#fff8f0] background-pattern font-[Poppins] text-[#4b3b2a]">
   <!-- Logo flotante en esquina superior derecha -->
   <div class="fixed top-4 right-4 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
-    <a href="secciones.html">
-      <img src="imagenes/logo.jpg" alt="Logo Culturita" class="h-14 w-14 object-contain rounded-full"/>
+    <a href="./secciones.html">
+      <img src="./imagenes/logo.jpg" alt="Logo Culturita" class="h-14 w-14 object-contain rounded-full"/>
     </a>
   </div>
   <!--<div class="fixed top-4 right-28 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
@@ -28,7 +28,7 @@
     <aside class="sidebar" style="background-color: #78350f;">
       <div class="sidebar__profile perfil-maestro">
         <a href="#" id="linkHistorial">
-          <img src="imagenes/maestro2.jpg" alt="Foto de Perfil"/>
+          <img src="./imagenes/maestro2.jpg" alt="Foto de Perfil"/>
         </a>
         <span id="nombre-maestro" class="maestro-nombre"></span>
       </div>
@@ -56,7 +56,7 @@
 
       <ul class="sidebar__menu sidebar__menu--bottom">
         <li>
-          <a href="index.html" title="Cerrar Sesión">
+          <a href="./index.html" title="Cerrar Sesión">
             <i class="ri-logout-box-r-line"></i>
             <span class="menu__text">Cerrar Sesión</span>
           </a>
@@ -67,8 +67,8 @@
     <div class="contenido-movil">
       <iframe id="seccion-contenido" src="" title="Contenido Maestro"></iframe>
     </div>
-    <script src="scripts/supabase.js"></script>
-    <script src="scripts/accesibilidad.js"></script>
+    <script src="./scripts/supabase.js"></script>
+    <script src="./scripts/accesibilidad.js"></script>
   </div>
 
   <script>
@@ -587,4 +587,5 @@
   });
   </script>
 </body>
+
 </html>
