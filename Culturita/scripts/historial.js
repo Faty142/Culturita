@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Manejar imagen de costumbre si existe
       let imagenHTML = '';
       if (alumno.imagenCostumbre) {
-        imagenHTML = `<img src="${alumno.imagenCostumbre}" alt="Imagen de costumbre" class="w-10 h-10 rounded-full object-cover mr-2">`;
+        imagenHTML = `<img src="./${alumno.imagenCostumbre}" alt="Imagen de costumbre" class="w-10 h-10 rounded-full object-cover mr-2">`;
       }
 
       // Verificar si el alumno ha sido editado recientemente
@@ -298,4 +298,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error al cargar el historial:", error);
   }
+
 });
