@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función asíncrona para mostrar alumnos en el mapa
     async function mostrarAlumnos() {
         // Carga la imagen base del mapa
-        contenedorMapa.innerHTML = `<img src="imagenes/mapa-mexico3.jpg" alt="Mapa de México" class="w-full h-full object-contain"/>`;
+        contenedorMapa.innerHTML = `<img src="./imagenes/mapa-mexico3.jpg" alt="Mapa de México" class="w-full h-full object-contain"/>`;
         const centroMexico = { x: 50, y: 55 }; // Coordenadas en el centro del mapa
 
         // Obtiene los alumnos del maestro desde Supabase
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // HTML interno del punto (avatar, nombre, origen)
             punto.innerHTML = `
-                <img src="imagenes/${alumno.avatar}.jpg" alt="Avatar" style="width:48px;height:48px;border-radius:50%;margin-bottom:6px;" />
+                <img src="./imagenes/${alumno.avatar}.jpg" alt="Avatar" style="width:48px;height:48px;border-radius:50%;margin-bottom:6px;" />
                 <div class="text-xs font-bold text-amber-800">${alumno.nombre}</div>
                 <div class="text-[11px] text-amber-700">${alumno.origen}</div>
             `;
@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         // Si no quedan alumnos, muestra solo el mapa base
                         const alumnosRestantes = document.querySelectorAll('#contenedorMapa > div');
                         if (alumnosRestantes.length === 0) {
-                        contenedorMapa.innerHTML = `<img src="imagenes/mapa-mexico3.jpg" alt="Mapa de México" class="w-full h-full object-contain"/>`;
+                        contenedorMapa.innerHTML = `<img src="./imagenes/mapa-mexico3.jpg" alt="Mapa de México" class="w-full h-full object-contain"/>`;
                         }
                     } else {
                         alert("Error al eliminar el alumno. Por favor intenta nuevamente.");
@@ -417,4 +417,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Carga inicial de alumnos
     mostrarAlumnos();
+
 });
