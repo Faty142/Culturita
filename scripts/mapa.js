@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const alumnosFiltrados = await manager.obtenerAlumnosDelMaestro(maestroId);
 
         if (!alumnosFiltrados) {
-            console.error("No se pudieron cargar los alumnos.");
+            console.error("No se pudieron cargar los alumnos. Intenta más tarde.");
             return;
         }
 
