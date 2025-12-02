@@ -119,7 +119,7 @@ async function renderizarAudios() {
   } catch (error) {
       console.error("Error al renderizar audios:", error);
       listaAudiosContainer.innerHTML = `
-          <p class="text-red-500">Error al cargar los audios. Intenta recargar la página.</p>
+          <p class="text-red-500">Error al cargar los audios. Intenta recargar la página de nuevo.</p>
           <p class="text-sm text-gray-500">${error.message}</p>
       `;
   }
@@ -193,7 +193,7 @@ async function initCuentaCuentos() {
 
       // Construye interfaz para padres (formulario de subida)
       document.getElementById("introText").innerHTML = `
-        Contribuye a la educación cultural de tus hijos grabando y compartiendo audios de tradiciones familiares. ¡Tus historias llegarán al aula y ayudarán a preservar nuestra herencia!`;
+        Graba y comparte audios de tus tradiciones familiares. Tus historias podrán escucharse en la escuela y ayudarán a que los niños conozcan nuestras costumbres.`;
         
       document.getElementById("contenido").innerHTML = `
         <h2 class="text-2xl font-semibold mb-4 text-center">Bienvenid@ ${nombreUsuario}, sube tu grabación</h2>
@@ -245,7 +245,7 @@ async function initCuentaCuentos() {
 
           // 1. Subir archivo a Supabase Storage
           const url = await manager.subirAudioYObtenerUrl(archivo);
-          if (!url) throw new Error("Error al subir el archivo de audio");
+          if (!url) throw new Error("Error al subir el archivo de audio, intenta de nuevo");
 
           // 2. Crear objeto audio y guardar en base de datos
           const nuevoAudio = new AudioCuentacuentos({
@@ -260,7 +260,7 @@ async function initCuentaCuentos() {
 
           const audioGuardado = await manager.guardarAudio(nuevoAudio);
               
-          if (!audioGuardado) throw new Error("No se recibió confirmación del servidor");
+          if (!audioGuardado) throw new Error("No se recibió confirmación del servidor. Intenta más tarde.");
 
           alert(`✅ Audio "${titulo}" enviado exitosamente a ${nombreMaestro}`);
           e.target.reset(); // Limpia el formulario
@@ -292,17 +292,46 @@ async function initCuentaCuentos() {
       const nombreMaestro = maestro?.full_name || 'Maestro';
 
       document.getElementById("introText").innerHTML = `
-      Explora la colección de audios que los padres han preparado para ti. Descarga cuentos, canciones y refranes tradicionales para compartir con tus alumnos y fomentar el amor por nuestras raíces.`;
+      Escucha los audios que los padres prepararon para ti. Puedes descargar cuentos, canciones y refranes tradicionales. Compártelos con tus alumnos para que conozcan nuestras tradiciones.`;
 
-      // Construye interfaz para maestros (lista de audios)
+      // Construye interfaz para maestros (lista de audios) SIN el botón de ayuda aquí
       let contenidoHTML = `
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-semibold">Bienvenido Maestr@ ${nombreMaestro}</h2>
+        <div class="relative mb-6">
+          <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-semibold">Bienvenido Maestr@ ${nombreMaestro}</h2>
+          </div>
         </div>
         <h3 class="text-lg font-medium mb-6">Audios recibidos</h3>
         <div id="listaAudios" class="space-y-4"></div>
       `;
       document.getElementById("contenido").innerHTML = contenidoHTML;
+      
+      // === NUEVO: CREAR BOTÓN DE AYUDA FIJO EN ESQUINA (similar al de padres) ===
+      // Crear botón de ayuda para maestros (estilo IDÉNTICO al de padres)
+      const ayudaButtonHTML = `
+        <div class="fixed top-4 right-28 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg" id="ayudaMaestroContainer">
+          <a href="#" id="btnAyudaMaestroFloating">
+            <img src="imagenes/ayuda.png" alt="Ayuda" class="h-10 w-10 object-contain rounded-full"/>
+          </a>
+        </div>
+      `;
+      
+      // Insertar directamente en el body
+      document.body.insertAdjacentHTML('beforeend', ayudaButtonHTML);
+      
+      // Configurar el evento del botón de ayuda flotante
+      const btnAyudaMaestroFloating = document.getElementById("btnAyudaMaestroFloating");
+      if (btnAyudaMaestroFloating) {
+        // Remover cualquier evento previo para evitar duplicados
+        btnAyudaMaestroFloating.replaceWith(btnAyudaMaestroFloating.cloneNode(true));
+        const newBtn = document.getElementById("btnAyudaMaestroFloating");
+        
+        newBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log("Botón de ayuda maestro clickeado");
+          mostrarAyudaMaestro();
+        });
+      }
       
       // Renderiza  los audios disponibles
       await renderizarAudios();
@@ -342,7 +371,7 @@ async function initCuentaCuentos() {
             button.innerHTML = '⬇️ Descargar';
             const errorMessage = error.message.includes('no existe') ? 
               'El archivo de audio fue eliminado' :
-              `Error: ${error.message || 'No se pudo completar la descarga'}`;
+              `Error: ${error.message || 'No se pudo completar la descarga, intenta más tarde'}`;
             showNotification(`❌ ${errorMessage}`, 'error');
           }
         }
@@ -354,7 +383,7 @@ async function initCuentaCuentos() {
           const button = e.target.closest(".btn-eliminar");
           const audioId = button.dataset.id;
           
-          if (confirm("¿Eliminar este audio de tu vista? (Permanecerá en el historial si fue descargado)")) {
+          if (confirm("¿Eliminar este audio de CuentaCuentos? (El audio permanecerá en el historial solo si fue descargado)")) {
             button.disabled = true;
             button.innerHTML = '<span class="loading">Eliminando...</span>';
 
@@ -380,7 +409,7 @@ async function initCuentaCuentos() {
 
     } else {
       // Bloquea acceso si no tiene rol válido
-      document.getElementById("contenido").innerHTML = `<p class="text-center text-red-600 font-semibold">No tienes acceso autorizado.</p>`;
+      document.getElementById("contenido").innerHTML = `<p class="text-center text-red-600 font-semibold">No tienes acceso autorizado. Inicia Sesión.</p>`;
     }
   } catch (error) {
     console.error("Error al inicializar CuentaCuentos:", error);
@@ -394,6 +423,123 @@ async function initCuentaCuentos() {
       </p>
     `;
   }
+}
+
+// Función para mostrar ayuda específica para maestros
+function mostrarAyudaMaestro() {
+  // Configuración específica para maestros
+  sistemaAyuda.guiaPasos = [
+    {
+      selector: '#introText',
+      titulo: 'Bienvenida para Maestros',
+      descripcion: 'Aquí puedes explorar los audios culturales que los padres han compartido contigo.',
+      posicionFlecha: 'bottom',
+      posicionPersonalizada: { top: '35%', left: '50%' }
+    },
+    {
+      selector: 'h2.text-2xl',
+      titulo: 'Tu Panel de Control',
+      descripcion: 'Esta es tu área personal donde gestionas los audios recibidos.',
+      posicionFlecha: 'bottom',
+      posicionPersonalizada: { top: '45%', left: '50%' }
+    },
+    {
+      selector: '#listaAudios',
+      titulo: 'Lista de Audios Recibidos',
+      descripcion: 'Aquí verás todos los audios organizados por categoría: cuentos, canciones y refranes.',
+      posicionFlecha: 'top',
+      posicionPersonalizada: { top: '50%', left: '50%' }
+    },
+    {
+      selector: '.btn-descargar',
+      titulo: 'Botón Descargar',
+      descripcion: 'Haz clic aquí para descargar el audio a tu dispositivo y guardarlo en tu historial.',
+      posicionFlecha: 'top',
+      posicionPersonalizada: { top: '65%', left: '30%' }
+    },
+    {
+      selector: '.btn-eliminar',
+      titulo: 'Botón Eliminar',
+      descripcion: 'Elimina audios de tu vista. Los audios descargados permanecen en tu historial.',
+      posicionFlecha: 'top',
+      posicionPersonalizada: { top: '65%', left: '55%' }
+    }
+  ];
+  
+  // Modal de explicación completa para maestros
+  sistemaAyuda.mostrarModalExplicacion = function() {
+    const modalHTML = `
+      <div id="modalExplicacion" class="fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-2xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-2xl font-bold text-[#78350f]">📚 Guía Completa - CuentaCuentos para Maestros</h3>
+            <button onclick="document.getElementById('modalExplicacion').remove()" 
+                    class="text-2xl text-gray-500 hover:text-red-500">×</button>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
+              <h4 class="font-bold text-lg mb-2">🎯 Propósito de esta sección</h4>
+              <p>Como maestro, esta sección te permite acceder a los audios culturales que los padres han compartido para enriquecer tus clases y fomentar las tradiciones mexicanas.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-white p-4 rounded-lg border border-amber-200">
+                <h4 class="font-bold text-lg mb-2">🎧 Gestión de Audios</h4>
+                <ul class="list-disc ml-5 space-y-2 text-sm text-left">
+                  <li><strong>Organización automática:</strong> Los audios se agrupan por categorías</li>
+                  <li><strong>Información completa:</strong> Ver título, descripción y quién lo envió</li>
+                  <li><strong>Reproducción inmediata:</strong> Escucha los audios directamente</li>
+                  <li><strong>Descarga segura:</strong> Guarda los audios en tu dispositivo</li>
+                </ul>
+              </div>
+
+              <div class="bg-white p-4 rounded-lg border border-amber-200">
+                <h4 class="font-bold text-lg mb-2">📥 Proceso de Descarga</h4>
+                <ol class="list-decimal ml-5 space-y-2 text-sm text-left">
+                  <li>Haz clic en "Descargar" en el audio que te interese</li>
+                  <li>El audio se guardará automáticamente en tu historial</li>
+                  <li>Podrás acceder a él desde la página de Historial</li>
+                  <li>El audio se descargará a tu dispositivo</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="bg-blue-50 p-4 rounded-lg">
+              <h4 class="font-bold text-lg mb-2">💡 Consejos para Maestros</h4>
+              <ul class="list-disc ml-5 space-y-2 text-left">
+                <li><strong>Organiza por temas:</strong> Descarga audios relacionados con tus unidades didácticas</li>
+                <li><strong>Involucra a los niños:</strong> Pídeles que identifiquen elementos culturales</li>
+                <li><strong>Complementa con actividades:</strong> Crea manualidades o dibujos relacionados</li>
+                <li><strong>Comparte con padres:</strong> Muestra cómo usas sus contribuciones en clase</li>
+              </ul>
+            </div>
+
+            <div class="bg-green-50 p-4 rounded-lg">
+              <h4 class="font-bold text-lg mb-2">🗑️ Sobre la Eliminación</h4>
+              <div class="space-y-2 text-sm">
+                <p><strong>Eliminar de la vista:</strong> Los audios desaparecen de esta lista pero permanecen en tu historial si fueron descargados.</p>
+                <p><strong>Historial preservado:</strong> Los audios descargados siempre estarán disponibles en tu página de Historial.</p>
+                <p><strong>Limpieza organizada:</strong> Usa esta función para mantener tu lista de audios actualizada y ordenada.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 text-center">
+            <button onclick="document.getElementById('modalExplicacion').remove()" 
+                    class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-lg transition">
+              Entendido, ¡gracias!
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+  };
+  
+  // Mostrar opciones de ayuda
+  sistemaAyuda.mostrarOpcionesAyuda();
 }
 
 // Llamada inicial a la función principal
