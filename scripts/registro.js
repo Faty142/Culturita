@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             
             if (campos.correo !== campos.confirmarCorreo) {
-                throw new Error("Los correos no coinciden");
+                throw new Error("Los correos no coinciden. Revisa e intenta de nuevo.");
             }
             
             if (campos.contrasena !== campos.confirmarContrasena) {
-                throw new Error("Las contraseñas no coinciden");
+                throw new Error("Las contraseñas no coinciden. Revisa e intenta de nuevo.");
             }
             
             if (campos.contrasena.length < 6) {
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (authError) {
                 if (authError.message.includes("User already registered")) {
-                    throw new Error("Este correo ya está registrado");
+                    throw new Error("Este correo ya está registrado. Intenta con otro.");
                 }
                 throw new Error(authError.message || "Error al registrar usuario");
             }
