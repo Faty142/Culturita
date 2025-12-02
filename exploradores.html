@@ -19,7 +19,7 @@
   <div class="max-w-5xl mx-auto relative">
     <h1 class="text-5xl font-bold text-center mb-4 tracking-wide">Exploradores de Tradición</h1>
     <p class="text-center text-lg md:text-xl font-medium mb-8 px-4">
-      ¿Listo para embarcarte en un viaje cultural? Cada estado revela un pedacito de identidad: historia, tradición, manualidades, palabras y valores para fomentar la exploración, expresión artística y comprensión de las tradiciones locales. Al interactuar, formas parte de esta exploración viva de nuestras raíces.
+      Cada estado tiene su propia identidad: historia, tradiciones, manualidades y palabras. Explora estos contenidos y comparte con tus alumnos las costumbres locales. Al participar, formas parte de este aprendizaje sobre nuestras raíces.
     </p>
 
     <main id="mapaExploradores" class="relative bg-[#ffffff] backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-lg border border-[#78350f]">
@@ -113,5 +113,151 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="scripts/modelos.js"></script>
   <script src="scripts/exploradores.js"></script>
+  <script src="scripts/accesibilidad.js"></script>
+  <script>
+  // Configuración específica para exploradores.html
+  sistemaAyuda.guiaPasos = [
+      {
+          selector: '.text-5xl.font-bold', // Selector más específico para el título
+          titulo: 'Título Principal',
+          descripcion: 'Bienvenido a Exploradores de Tradición. Aquí podrás descubrir las tradiciones culturales de cada estado de México.',
+          posicionFlecha: 'bottom',
+          posicionPersonalizada: { top: '28%', left: '50%' }
+      },
+      {
+          selector: '.text-center.text-lg', // Selector más específico para la descripción
+          titulo: 'Descripción',
+          descripcion: 'Esta sección explica el propósito de la aplicación: explorar historia, tradiciones, manualidades y valores culturales de cada estado.',
+          posicionFlecha: 'bottom',
+          posicionPersonalizada: { top: '45%', left: '50%' }
+      },
+      {
+          selector: '#mapaExploradores h2', // Selector específico para el h2 dentro del main
+          titulo: 'Instrucciones',
+          descripcion: 'Selecciona un estado en el mapa o usa el botón para ver los estados que ya has desbloqueado.',
+          posicionFlecha: 'bottom',
+          posicionPersonalizada: { top: '30%', left: '50%' }
+      },
+      {
+          selector: '.mt-6 button', // Selector específico para el botón
+          titulo: 'Botón Estados Desbloqueados',
+          descripcion: 'Haz clic aquí para ver una lista de todos los estados que ya puedes explorar.',
+          posicionFlecha: 'bottom',
+          posicionPersonalizada: { top: '40%', left: '50%' }
+      },
+      {
+          selector: '.relative.w-full.h-\\[600px\\]', // Selector escapado para la clase con corchetes
+          titulo: 'Mapa Interactivo',
+          descripcion: 'Este es el mapa de México. Los estados en verde están disponibles, los rojos están bloqueados. Haz clic en cualquier estado para ver su información.',
+          posicionFlecha: 'top',
+          posicionPersonalizada: { top: '70%', left: '50%' }
+      },
+      {
+          selector: '.mt-4.text-sm', // Selector específico para la leyenda
+          titulo: 'Leyenda del Mapa',
+          descripcion: 'Aquí puedes ver qué significan los colores: verde para estados disponibles, rojo para estados bloqueados.',
+          posicionFlecha: 'top',
+          posicionPersonalizada: { top: '70%', left: '50%' }
+      }
+  ];
+
+  // Sobreescribir el método de explicación completa para exploradores.html
+  sistemaAyuda.mostrarModalExplicacion = function() {
+      const modalHTML = `
+          <div id="modalExplicacion" class="fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+              <div class="bg-white rounded-2xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                  <div class="flex justify-between items-center mb-4">
+                      <h3 class="text-2xl font-bold text-[#78350f]">📚 Guía Completa - Exploradores de Tradición</h3>
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="text-2xl text-gray-500 hover:text-red-500">×</button>
+                  </div>
+
+                  <div class="space-y-6">
+                      <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
+                          <h4 class="font-bold text-lg mb-2">🎯 Propósito de esta página</h4>
+                          <p>En "Exploradores de Tradición" podrás descubrir y aprender sobre la riqueza cultural de los diferentes estados de México. Cada estado contiene información única sobre sus tradiciones, historia y valores culturales.</p>
+                      </div>
+
+                      <div class="grid md:grid-cols-2 gap-4">
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span>🗺️ Mapa Interactivo</h4>
+                              <p class="mb-3">Características principales del mapa:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li><strong>Estados verdes:</strong> Disponibles para explorar</li>
+                                  <li><strong>Estados rojos:</strong> Bloqueados (próximamente)</li>
+                                  <li><strong>Haz clic</strong> en cualquier estado para ver su información</li>
+                                  <li>Información cultural completa de cada región</li>
+                              </ul>
+                          </div>
+
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span>📋 Información por Estado</h4>
+                              <p class="mb-3">Cada estado incluye:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li>Mini historia del estado</li>
+                                  <li>Tradiciones culturales</li>
+                                  <li>Manualidades típicas</li>
+                                  <li>Palabras regionales y su significado</li>
+                                  <li>Valores culturales importantes</li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="bg-blue-50 p-4 rounded-lg">
+                          <h4 class="font-bold text-lg mb-2">💡 ¿Cómo usar esta página?</h4>
+                          <ol class="list-decimal ml-5 space-y-2 text-left">
+                              <li><strong>Explora el mapa</strong> haciendo clic en los estados verdes</li>
+                              <li><strong>Usa el botón "Ver estados desbloqueados"</strong> para una lista rápida</li>
+                              <li><strong>Haz clic en cualquier estado disponible</strong> para ver su información completa</li>
+                              <li><strong>Descarga la información</strong> en PDF para guardarla o compartirla</li>
+                              <li><strong>Los estados rojos</strong> se irán desbloqueando con el tiempo</li>
+                          </ol>
+                      </div>
+
+                      <div class="bg-green-50 p-4 rounded-lg">
+                          <h4 class="font-bold text-lg mb-2">📥 Función de Descarga</h4>
+                          <p>Cuando explores un estado, podrás descargar toda su información cultural en formato PDF, incluyendo:</p>
+                          <ul class="list-disc ml-5 mt-2 text-sm text-left">
+                              <li>Historia completa del estado</li>
+                              <li>Instrucciones para manualidades</li>
+                              <li>Glosario de palabras regionales</li>
+                              <li>Imágenes de las tradiciones</li>
+                          </ul>
+                      </div>
+                  </div>
+
+                  <div class="mt-6 text-center">
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-lg transition">
+                          Entendido, ¡gracias!
+                      </button>
+                  </div>
+              </div>
+          </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+  };
+
+  // Configurar el botón de ayuda
+  document.addEventListener('DOMContentLoaded', function() {
+      const btnAyuda = document.getElementById('btnAyuda');
+      if (btnAyuda) {
+          btnAyuda.addEventListener('click', function(e) {
+              e.preventDefault();
+              sistemaAyuda.mostrarOpcionesAyuda();
+          });
+      }
+
+      // DEBUG: Verificar que los selectores funcionen
+      console.log('=== DEBUG SELECTORES EXPLORADORES ===');
+      sistemaAyuda.guiaPasos.forEach((paso, index) => {
+          const elemento = document.querySelector(paso.selector);
+          console.log(`Paso ${index + 1} (${paso.selector}):`, elemento ? 'ENCONTRADO' : 'NO ENCONTRADO', elemento);
+      });
+  });
+  </script>
 </body>
 </html>
