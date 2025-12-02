@@ -52,5 +52,161 @@
   <script src="scripts/supabase.js"></script>
   <script src="scripts/modelos.js"></script>
   <script src="scripts/historial.js"></script>
+  <script src="scripts/accesibilidad.js"></script>
+  
+  <script>
+  // Configuración específica para historial.html
+  sistemaAyuda.guiaPasos = [
+      {
+          selector: 'h1.text-5xl',
+          titulo: 'Título Principal',
+          descripcion: 'Esta es tu página de Historial donde puedes ver todas tus actividades en Culturita.',
+          posicionFlecha: 'bottom',
+          posicionPersonalizada: { top: '30%', left: '50%' }
+      },
+      {
+          selector: 'p.text-center.text-lg',
+          titulo: 'Descripción del Historial',
+          descripcion: 'Aquí se explica el propósito de esta página: registrar tus actividades, alumnos y exploraciones.',
+          posicionFlecha: 'bottom',
+          posicionPersonalizada: { top: '40%', left: '50%' }
+      },
+      {
+          selector: '#seccionesHistorial section:nth-child(1)',
+          titulo: 'Audios Descargados',
+          descripcion: 'En esta sección verás todos los audios que has descargado desde CuentaCuentos.',
+          posicionFlecha: 'top',
+          posicionPersonalizada: { top: '40%', left: '50%' }
+      },
+      {
+          selector: '#seccionesHistorial section:nth-child(2)',
+          titulo: 'Alumnos Registrados',
+          descripcion: 'Aquí encontrarás la lista de alumnos que has registrado en Mi Mapa Mágico.',
+          posicionFlecha: 'top',
+          posicionPersonalizada: { top: '55%', left: '50%' }
+      },
+      {
+          selector: '#seccionesHistorial section:nth-child(3)',
+          titulo: 'Estados Explorados',
+          descripcion: 'Esta sección muestra los estados que has explorado en Exploradores de Tradición.',
+          posicionFlecha: 'top',
+          posicionPersonalizada: { top: '70%', left: '50%' }
+      },
+      {
+          selector: '#btnLimpiarHistorial',
+          titulo: 'Limpiar Historial',
+          descripcion: 'Con este botón puedes eliminar todo tu historial de forma permanente.',
+          posicionFlecha: 'top',
+          posicionPersonalizada: { top: '65%', left: '50%' }
+      }
+  ];
+
+  // Sobreescribir el método de explicación completa para historial.html
+  sistemaAyuda.mostrarModalExplicacion = function() {
+      const modalHTML = `
+          <div id="modalExplicacion" class="fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+              <div class="bg-white rounded-2xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                  <div class="flex justify-between items-center mb-4">
+                      <h3 class="text-2xl font-bold text-[#78350f]">📚 Guía Completa - Página de Historial</h3>
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="text-2xl text-gray-500 hover:text-red-500">×</button>
+                  </div>
+
+                  <div class="space-y-6">
+                      <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
+                          <h4 class="font-bold text-lg mb-2">🎯 Propósito de esta página</h4>
+                          <p>La página de Historial es tu centro de control donde puedes ver y gestionar todas las actividades que has realizado en Culturita. Es como tu diario de trabajo educativo.</p>
+                      </div>
+
+                      <div class="grid md:grid-cols-3 gap-4">
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span>🎧 Audios Descargados</h4>
+                              <p class="mb-3">Desde CuentaCuentos:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li>Audios que has descargado</li>
+                                  <li>Información del contenido</li>
+                                  <li>Fecha de descarga</li>
+                                  <li>Puedes eliminarlos individualmente</li>
+                              </ul>
+                          </div>
+
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span>🧑‍🎓 Alumnos Registrados</h4>
+                              <p class="mb-3">Desde Mi Mapa Mágico:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li>Lista de tus alumnos</li>
+                                  <li>Origen y costumbres</li>
+                                  <li>Indicador de edición reciente</li>
+                                  <li>Gestión individual</li>
+                              </ul>
+                          </div>
+
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span>🌎 Estados Explorados</h4>
+                              <p class="mb-3">Desde Exploradores de Tradición:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li>Estados que has visitado</li>
+                                  <li>Información cultural</li>
+                                  <li>Tradiciones y palabras</li>
+                                  <li>Fechas de exploración</li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="bg-blue-50 p-4 rounded-lg">
+                          <h4 class="font-bold text-lg mb-2">💡 ¿Cómo usar esta página?</h4>
+                          <ol class="list-decimal ml-5 space-y-2 text-left">
+                              <li><strong>Revisa cada sección</strong> para ver tus actividades</li>
+                              <li><strong>Elimina elementos individuales</strong> con el botón 🗑️</li>
+                              <li><strong>Usa "Limpiar todo el historial"</strong> para borrar todo</li>
+                              <li><strong>Los audios eliminados</strong> solo se borran del historial, no de CuentaCuentos</li>
+                              <li><strong>Los alumnos y estados eliminados</strong> se borran permanentemente</li>
+                          </ol>
+                      </div>
+
+                      <div class="bg-green-50 p-4 rounded-lg">
+                          <h4 class="font-bold text-lg mb-2">⚠️ Importante sobre eliminación</h4>
+                          <div class="space-y-2 text-sm">
+                              <p><strong>Audios:</strong> Solo se eliminan de tu historial, permanecen disponibles en CuentaCuentos para volver a descargar.</p>
+                              <p><strong>Alumnos y Estados:</strong> Se eliminan permanentemente y no podrás recuperarlos.</p>
+                              <p class="text-amber-700 font-semibold">¡La acción de limpiar todo el historial no se puede deshacer!</p>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="mt-6 text-center">
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-lg transition">
+                          Entendido, ¡gracias!
+                      </button>
+                  </div>
+              </div>
+          </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+  };
+
+  // Configurar el botón de ayuda
+  document.addEventListener('DOMContentLoaded', function() {
+      const btnAyuda = document.getElementById('btnAyuda');
+      if (btnAyuda) {
+          btnAyuda.addEventListener('click', function(e) {
+              e.preventDefault();
+              sistemaAyuda.mostrarOpcionesAyuda();
+          });
+      }
+
+      // DEBUG: Verificar que los selectores funcionen
+      console.log('=== DEBUG SELECTORES HISTORIAL ===');
+      sistemaAyuda.guiaPasos.forEach((paso, index) => {
+          const elemento = document.querySelector(paso.selector);
+          console.log(`Paso ${index + 1} (${paso.selector}):`, elemento ? 'ENCONTRADO' : 'NO ENCONTRADO', elemento);
+      });
+  });
+  </script>
 </body>
 </html>
