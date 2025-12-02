@@ -19,7 +19,7 @@
   <div class="max-w-5xl mx-auto">
     <h1 class="text-5xl font-bold text-center mb-4 tracking-wide">Mi Mapa Mágico</h1>
     <p class="text-center text-lg md:text-xl font-medium mb-6 px-4">
-      Este mapa no es solo geografía, es un portal a las costumbres, palabras y valores de tus alumnos. Agrega información cultural de tus alumnos para estimular el conocimiento de la diversidad cultural presente en el aula, además de que podrás descargar el mapa para trabajar en clase.
+      Este mapa muestra más que lugares. También incluye costumbres, palabras y tradiciones de tus alumnos. Agrega información cultural para que todos conozcan la diversidad en el aula. Después podrás descargar el mapa y usarlo en clase.
     </p>
 
     <!-- Botón de registrar -->
@@ -36,13 +36,13 @@
 
       <!-- Botones de descarga -->
       <div class="flex flex-wrap justify-center gap-4 mt-8">
-        <button id="descargarMapa" class="bg-[#78350f] text-[#fde68a] font-bold py-2 px-6 rounded hover:bg-[#fbbf24] hover:text-[#78350f] transition">
+        <button id="descargarMapa" class="bg-[#b45309] text-[#fef3c7] font-bold py-2 px-6 rounded hover:bg-[#fef3c7] hover:text-[#b45309] transition">
           Descargar como Imagen
         </button>
-        <button id="descargarPDF" class="bg-[#78350f] text-[#fde68a] font-bold py-2 px-6 rounded hover:bg-[#fbbf24] hover:text-[#78350f] transition">
+        <button id="descargarPDF" class="bg-[#78350f] text-[#fde68a] font-bold py-2 px-6 rounded hover:bg-[#fde68a] hover:text-[#78350f] transition">
           Descargar como PDF
         </button>
-        <button id="descargarMapaLimpioPDF" class="bg-[#10B981] text-white font-bold py-2 px-6 rounded hover:bg-[#059669] transition">
+        <button id="descargarMapaLimpioPDF" class="bg-[#92400e] text-[#fed7aa] font-bold py-2 px-6 rounded hover:bg-[#fed7aa] hover:text-[#92400e] transition">
           Descargar solo el mapa como PDF
         </button>
       </div>
@@ -109,5 +109,138 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="scripts/modelos.js"></script>
   <script src="scripts/mapa.js"></script>
+  <script src="scripts/accesibilidad.js"></script>
+  <script>
+  // Configuración específica para mapamagico.html
+  sistemaAyuda.guiaPasos = [
+      {
+          selector: 'h1',
+          titulo: 'Título del Mapa Mágico',
+          descripcion: 'Bienvenido a tu Mapa Mágico, donde podrás registrar la información cultural de tus alumnos.',
+          posicionFlecha: 'bottom'
+      },
+      {
+          selector: '#abrirFormulario',
+          titulo: 'Registrar Nuevo Alumno',
+          descripcion: 'Haz clic aquí para agregar un nuevo alumno al mapa cultural.',
+          posicionFlecha: 'bottom'
+      },
+      {
+          selector: '#contenedorMapa',
+          titulo: 'Mapa Cultural Interactivo',
+          descripcion: 'Aquí verás el mapa de México con todos tus alumnos registrados. Cada punto representa un alumno.',
+          posicionFlecha: 'top'
+      },
+      {
+          selector: '#descargarMapa',
+          titulo: 'Descargar como Imagen',
+          descripcion: 'Descarga el mapa completo con todos los alumnos como imagen PNG.',
+          posicionFlecha: 'top',
+          posicionPersonalizada: { top: '70%', left: '20%' }
+      },
+      {
+          selector: '#descargarPDF',
+          titulo: 'Descargar como PDF',
+          descripcion: 'Descarga el mapa completo con encabezado y fecha como documento PDF.',
+          posicionFlecha: 'top',
+          posicionPersonalizada: { top: '65%', left: '45%' }
+      },
+      {
+          selector: '#descargarMapaLimpioPDF',
+          titulo: 'Descargar Mapa Limpio',
+          descripcion: 'Descarga solo el mapa base sin alumnos, ideal para actividades en clase.',
+          posicionFlecha: 'top',
+          posicionPersonalizada: { top: '65%', left: '65%' }
+      }
+  ];
+
+  // Sobreescribir el método de explicación completa para mapamagico.html
+  sistemaAyuda.mostrarModalExplicacion = function() {
+      const modalHTML = `
+          <div id="modalExplicacion" class="fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+              <div class="bg-white rounded-2xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                  <div class="flex justify-between items-center mb-4">
+                      <h3 class="text-2xl font-bold text-[#78350f]">📚 Guía Completa - Mapa Mágico</h3>
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="text-2xl text-gray-500 hover:text-red-500">×</button>
+                  </div>
+
+                  <div class="space-y-6">
+                      <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
+                          <h4 class="font-bold text-lg mb-2">🎯 Propósito de esta página</h4>
+                          <p>El Mapa Mágico es una herramienta interactiva para registrar y visualizar la diversidad cultural de tus alumnos en un mapa de México.</p>
+                      </div>
+
+                      <div class="grid md:grid-cols-2 gap-4">
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span>📍 Registrar Alumnos</h4>
+                              <p class="mb-3">Puedes registrar cada alumno con:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li>Nombre y lugar de origen</li>
+                                  <li>Costumbres y palabras típicas</li>
+                                  <li>Avatar (niño/niña)</li>
+                                  <li>Imagen representativa</li>
+                              </ul>
+                          </div>
+
+                          <div class="bg-white p-4 rounded-lg border border-amber-200">
+                              <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                  <span>🗺️ Funciones del Mapa</h4>
+                              <p class="mb-3">Interactúa con el mapa:</p>
+                              <ul class="list-disc ml-5 space-y-1 text-sm text-left">
+                                  <li>Cada alumno aparece como un punto</li>
+                                  <li>Líneas conectan al centro</li>
+                                  <li>Haz clic en cada punto para ver detalles</li>
+                                  <li>Edita, elimina o mueve alumnos</li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="bg-blue-50 p-4 rounded-lg">
+                          <h4 class="font-bold text-lg mb-2">💡 Funcionalidades Avanzadas</h4>
+                          <ol class="list-decimal ml-5 space-y-2 text-left">
+                              <li><strong>Descarga el mapa</strong> como imagen PNG para compartir</li>
+                              <li><strong>Genera PDFs</strong> con encabezado profesional</li>
+                              <li><strong>Mapa limpio</strong> para actividades en clase</li>
+                              <li><strong>Gestión completa</strong> de alumnos registrados</li>
+                          </ol>
+                      </div>
+
+                      <div class="bg-green-50 p-4 rounded-lg">
+                          <h4 class="font-bold text-lg mb-2">🎮 Cómo usar el mapa</h4>
+                          <ul class="list-disc ml-5 space-y-2 text-left">
+                              <li><strong>✏️ Botón editar:</strong> Modifica la información del alumno</li>
+                              <li><strong>🗑️ Botón eliminar:</strong> Quita al alumno del mapa (se mantiene en historial)</li>
+                              <li><strong>🧭 Botón mover:</strong> Cambia la posición en el mapa automáticamente</li>
+                              <li><strong>Clic en el punto:</strong> Ve toda la información del alumno</li>
+                          </ul>
+                      </div>
+                  </div>
+
+                  <div class="mt-6 text-center">
+                      <button onclick="document.getElementById('modalExplicacion').remove()" 
+                              class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-lg transition">
+                          Entendido, ¡gracias!
+                      </button>
+                  </div>
+              </div>
+          </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+  };
+
+  // Configurar el botón de ayuda
+  document.addEventListener('DOMContentLoaded', function() {
+      const btnAyuda = document.getElementById('btnAyuda');
+      if (btnAyuda) {
+          btnAyuda.addEventListener('click', function(e) {
+              e.preventDefault();
+              sistemaAyuda.mostrarOpcionesAyuda();
+          });
+      }
+  });
+  </script>
 </body>
 </html>
