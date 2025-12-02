@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Obtener ID del maestro desde sessionStorage
     const maestroId = sessionStorage.getItem("usuarioId");
     if (!maestroId) {
-      console.error("No se encontró maestroId en sessionStorage");
+      console.error("No se encontró maestroId en sessionStorage. Carga de nuevo la página, o inicia sesión.");
       return;
     }
 
@@ -180,14 +180,14 @@ document.addEventListener("DOMContentLoaded", async () => {
           contenedorEstados.appendChild(generarElementoEstado(estado.data, estado.id));
         });
       } else {
-        contenedorEstados.innerHTML = "<p class='italic'>No has explorado estados aún.</p>";
+        contenedorEstados.innerHTML = "<p class='italic'>No has explorado (descargado) estados aún.</p>";
       }
     }
 
     // Funciones para eliminar elementos
     window.eliminarDelHistorial = async (id) => {
       // Confirmar antes de eliminar audio del historial
-      if (confirm("¿Deseas eliminar este audio solo del historial? (Seguirá disponible en CuentaCuentos)")) {
+      if (confirm("¿Deseas eliminar este audio del historial? (Seguirá disponible en CuentaCuentos, si no lo has eliminado allí)")) {
         await historialManager.eliminarAudioDelHistorial(id);
         location.reload();
       }
@@ -213,18 +213,18 @@ document.addEventListener("DOMContentLoaded", async () => {
                   "<p class='italic'>No has registrado alumnos aún.</p>";
             }
           } else {
-            alert("Error al eliminar del historial");
+            alert("Error al eliminar del historial. Intenta más tarde.");
           }
         } catch (error) {
           console.error('Error al eliminar del historial:', error);
-          alert("Ocurrió un error al eliminar del historial");
+          alert("Ocurrió un error al eliminar del historial. Intenta más tarde.");
         }
       }
     };
 
     // Eliminar estado del historial
     window.confirmarEliminarEstado = async (id) => {
-      if (confirm("¿Deseas eliminar este estado del historial?")) {
+      if (confirm("¿Deseas eliminar este estado (descargado) del historial?")) {
           try {
               const success = await historialManager.eliminarExploracion(id);
               if (success) {
@@ -242,18 +242,18 @@ document.addEventListener("DOMContentLoaded", async () => {
                           "<p class='italic'>No has explorado estados aún.</p>";
                   }
               } else {
-                  alert("Error al eliminar del historial");
+                  alert("Error al eliminar del historial. Intenta más tarde.");
               }
           } catch (error) {
               console.error('Error al eliminar estado:', error);
-              alert("Ocurrió un error al eliminar del historial");
+              alert("Ocurrió un error al eliminar del historial. Intenta más tarde.");
           }
       }
   };
 
     // Limpiar todo el historial
     document.getElementById("btnLimpiarHistorial").addEventListener("click", async function() {
-      if (!confirm("¿Estás segura de que deseas limpiar todo tu historial? Esta acción no se puede deshacer.")) {
+      if (!confirm("¿Estás segur@ de que deseas limpiar todo tu historial? Esta acción no se puede deshacer.")) {
         return;
       }
 
@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Error al limpiar historial:", error);
         btn.disabled = false;
         btn.textContent = originalText;
-        alert("❌ Error al limpiar el historial");
+        alert("❌ Error al limpiar el historial. Intenta de nuevo más tarde.");
       }
     });
 
