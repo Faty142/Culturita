@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (error) throw error;
       
       if (!maestros || maestros.length === 0) {
-        throw new Error("No hay maestros registrados en el sistema");
+        throw new Error("No hay maestros registrados en el sistema. No puedes continuar.");
       }
 
       const select = document.getElementById("maestro");
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     
     if (authError) throw authError;
-    if (!authData.user) throw new Error("No se pudo obtener datos del usuario");
+    if (!authData.user) throw new Error("No se pudo obtener datos del usuario. Carga de nuevo.");
 
     // 2. Obtener datos del usuario con mejor manejo de errores
     const { data: userData, error: userError } = await supabase
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           role: rolParam || 'maestro' // Rol por defecto
         }, { onConflict: 'id' });
       
-      if (upsertError) throw new Error("No se pudo crear registro de usuario");
+      if (upsertError) throw new Error("No se pudo crear registro de usuario. Intenta más tarde.");
       
       // Reintentar obtener los datos
       const { data: newUserData } = await supabase
@@ -125,10 +125,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     : `cuentacuentos.html?maestroId=${maestroSelect.value}`;
     window.location.href = redirectPath;
 
-  } catch (error) {
-    console.error("Error en login:", error);
-    alert(`Error: ${error.message || "Error al iniciar sesión"}`);
-    document.getElementById('contrasena').value = '';
-  }
+      // En el bloque catch del event listener submit en login.js
+    } catch (error) {
+      console.error("Error en login:", error);
+      
+      // Mensaje de error más amigable para credenciales inválidas
+      let mensajeError = "Error al iniciar sesión";
+      
+      if (error.message && error.message.includes("Invalid login credentials")) {
+        mensajeError = "Credenciales inválidas. Verifica tu correo electrónico y contraseña.";
+      } else if (error.message && error.message.includes("Email not confirmed")) {
+        mensajeError = "Correo electrónico no confirmado. Por favor, revisa tu bandeja de entrada.";
+      } else if (error.message && error.message.includes("User already registered")) {
+        mensajeError = "El usuario ya está registrado con otro método de autenticación.";
+      } else {
+        mensajeError = error.message || "Error al iniciar sesión";
+      }
+      
+      alert(`Error: ${mensajeError}`);
+      document.getElementById('contrasena').value = '';
+    }
   });
 });
