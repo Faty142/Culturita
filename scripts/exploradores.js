@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Verificar sesión al inicio
     const usuarioId = sessionStorage.getItem("usuarioId");
     if (!usuarioId) {
-        console.error('No hay usuario logueado');
+        console.error('No hay usuario logueado. Inicia sesión para continuar.');
         // Opcional: redirigir al login o mostrar mensaje
         return;
     }
