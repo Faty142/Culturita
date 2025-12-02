@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Culturita - Selección de Perfil</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            // Tus colores personalizados
+          }
+        }
+      }
+    }
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     /* Estilos adicionales para eliminar el scroll */
@@ -50,39 +62,45 @@
     }
   </style>
 </head>
-<body class="bg-[#fef3c7] background-pattern min-h-screen flex flex-col items-center justify-center text-[#4b3b2a] p-4">
+<body class="bg-[#fef3c7] dark:bg-gray-900 background-pattern min-h-screen flex flex-col items-center justify-center text-[#4b3b2a] p-4">
   <!-- Logo flotante en esquina superior derecha -->
-  <div class="fixed top-4 right-4 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
-    <img src="./imagenes/logo.jpg" alt="Logo Culturita" class="h-14 w-14 object-contain rounded-full" />
+  <div class="fixed top-4 right-4 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
+    <img src="imagenes/logo.jpg" alt="Logo Culturita" class="h-14 w-14 object-contain rounded-full" />
   </div>
-  <div class="fixed top-4 right-28 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
+  <!-- BOTÓN DE TEMA OSCURO - NUEVO -->
+  <div class="fixed top-4 right-44 z-50">
+    <button id="toggleDarkMode" class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-2 rounded-full shadow-md border border-white/70 dark:border-gray-700 flex items-center justify-center hover:scale-105 transition-transform">
+      <span id="themeIcon" class="text-xl">🌙</span>
+    </button>
+  </div>
+  <div class="fixed top-4 right-28 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-2 rounded-full shadow-lg">
     <a href="#" id="btnAyuda">
-      <img src="./imagenes/ayuda.png" alt="Ayuda" class="h-10 w-10 object-contain rounded-full"/>
+      <img src="imagenes/ayuda.png" alt="Ayuda" class="h-10 w-10 object-contain rounded-full"/>
     </a>
   </div>
   
   <header class="text-center mb-10">
-    <h1 class="text-5xl md:text-6xl font-bold tracking-wide text-[#4b3b2a]">Culturita</h1>
-    <h2 class="text-xl md:text-2xl font-semibold mt-3 text-[#4b3b2a]">Selecciona tu perfil</h2>
+    <h1 class="text-5xl md:text-6xl font-bold tracking-wide text-[#4b3b2a] dark:text-amber-100">Culturita</h1>
+    <h2 class="text-xl md:text-2xl font-semibold mt-3 text-[#4b3b2a] dark:text-amber-200">Selecciona tu perfil</h2>
   </header>
 
   <main class="flex flex-col md:flex-row gap-12 md:gap-16 mt-4 items-center justify-center">
     <div onclick="redirigirLogin('padres')" class="perfil cursor-pointer transition-all duration-300 text-center flex flex-col items-center">
       <div class="perfil-img flex items-center justify-center overflow-hidden">
-        <img src="./imagenes/padres4.png" alt="Padres" class="w-5/6 h-5/6 object-contain">
+        <img src="imagenes/padres4.png" alt="Padres" class="w-5/6 h-5/6 object-contain">
       </div>
-      <p class="mt-5 font-bold text-xl text-[#4b3b2a] bg-amber-100 py-2 px-6 rounded-full border border-amber-300">Padres</p>
+      <p class="mt-5 font-bold text-xl text-[#4b3b2a] dark:text-amber-100 bg-amber-100 dark:bg-gray-800 py-2 px-6 rounded-full border border-amber-300 dark:border-amber-600">Padres</p>
     </div>
 
     <div onclick="redirigirLogin('maestro')" class="perfil cursor-pointer transition-all duration-300 text-center flex flex-col items-center">
       <div class="perfil-img flex items-center justify-center overflow-hidden">
-        <img src="./imagenes/maestro4.png" alt="Maestro" class="w-5/6 h-5/6 object-contain">
+        <img src="imagenes/maestro4.png" alt="Maestro" class="w-5/6 h-5/6 object-contain">
       </div>
-      <p class="mt-5 font-bold text-xl text-[#4b3b2a] bg-amber-100 py-2 px-6 rounded-full border border-amber-300">Maestro</p>
+      <p class="mt-5 font-bold text-xl text-[#4b3b2a] dark:text-amber-100 bg-amber-100 dark:bg-gray-800 py-2 px-6 rounded-full border border-amber-300 dark:border-amber-600">Maestro</p>
     </div>
   </main>
 
-  <footer class="mt-10 text-center text-[#78350f] bg-white py-3 px-6 rounded-lg border-2 border-amber-500 shadow-sm max-w-2xl">
+  <footer class="mt-10 text-center text-[#78350f] dark:text-amber-200 bg-white dark:bg-gray-800 py-3 px-6 rounded-lg border-2 border-amber-500 dark:border-amber-600 shadow-sm max-w-2xl">
     <p class="text-base font-bold mb-2">Aplicación web desarrollada para el Kínder Miguel Ángel de Quevedo</p>
     <p class="text-sm font-medium">Una herramienta para fomentar la cultura y tradiciones mexicanas</p>
   </footer>
@@ -93,9 +111,9 @@
     }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="./scripts/supabase.js"></script>
-
-  <script src="./scripts/accesibilidad.js"></script>
+  <script src="scripts/supabase.js"></script>
+  <script src="scripts/accesibilidad.js"></script>
+  <script src="scripts/theme.js"></script>
   <script>
   // Configuración específica para index.html
   sistemaAyuda.guiaPasos = [
@@ -212,5 +230,4 @@
   });
   </script>
 </body>
-
 </html>
